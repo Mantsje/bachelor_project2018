@@ -1,0 +1,26 @@
+%YAML 1.2
+---
+
+name: Stat
+file_extensions: [st]
+scope: source.st
+
+variables:
+  Number: '((?<!)[0-9]) ([a-z]+) ((?!)[0-9])'
+  Id: '((?<!)[a-z]) ([a-z]+) ((?!)[a-z])'
+
+contexts:
+  main:
+    - include: Context-Num
+    - include: Context-Id
+
+  Context-Num:
+    - match: '{{Num}}'
+      scope: constant.numeric.integer.st
+      set: [Context-Id]
+
+  Context-Id:
+    - match: '{{Id}}'
+      scope: keyword.controlflow.st
+      set: [Context-Num]
+
