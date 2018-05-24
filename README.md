@@ -6,6 +6,7 @@ This is just the project that I have been working in. It is as of yet not nicely
 
 ### Breakdown
 The target algorithm can be divided in a view parts:
+
 	* Take the original grammar and rewrite it to a Strongly Regular Grammar (SRG)
 		- This accepts a superset of the original grammar
 	* Map SRG to a set of StateMachines (Non-Deterministic). Every Symbol, Production and SubSymbol gets its own machine. returning a map[Symbol, StateMachine]
@@ -29,7 +30,7 @@ The target algorithm can be divided in a view parts:
 			- If the target state is final, but has outgoing transitions we need some determining mechanism that says either pop or continue in this machine
 			- If the token is NonTerminal we need to recursively find the possible initial TerminalTokens for all these NonTerminal DFSMs. Based on the one we find by lookahead we can determine to what context we need to go next
 
-###Progress
+### Progress
 Currently working on the last (* item) in the break down. The other parts are close to fully working and at least in some minimum viable product form
 
 ## Where to find what
