@@ -1,5 +1,5 @@
 # bachelor_project2018
-Aimed at providing an algorithm that takes in a grammar definition in Rascal and creates from this a state-based syntax highlighter for various editors.
+Aimed at providing an algorithm that takes in a grammar definition in Rascal and creates from this a state-based syntax highlighter for various editors. Fails to do so properly
 
 ## Contents
 This is just the project that I have been working in. It is as of yet not nicely refactored and commented yet. Just here and there is something written that should contribute to the understanding of the code.
@@ -30,8 +30,6 @@ The target algorithm can be divided in a view parts:
 			- If the target state is final, but has outgoing transitions we need some determining mechanism that says either pop or continue in this machine
 			- If the token is NonTerminal we need to recursively find the possible initial TerminalTokens for all these NonTerminal DFSMs. Based on the one we find by lookahead we can determine to what context we need to go next
 
-### Progress
-Currently working on the last (* item) in the break down. The other parts are close to fully working and at least in some minimum viable product form
 
 ## Where to find what
 	* src::grammar
@@ -41,8 +39,19 @@ Currently working on the last (* item) in the break down. The other parts are cl
 	* src::syntax_highlighting
 		Contains beginnings of the work on converting the machines to the syntax highlighters. Generating regular expressions for the symbols, determining to which DFSM to go proves difficult enough.
 	* src::grammar2dfa
-		Contains files on generating all the Finite State machines from grammars. It also includes functions for writing one big DFSM for the entire language, however for large grammars this grows out of hand very quickly. (C-language generates 123000 states and 156000 transitions oof which most are epsilon-transitions)
+		Contains files on generating all the Finite State machines from grammars.
 		* ::automata 
 			StateMachine functionality, datatypes, printers, etc
-		* ::symbols
-			Functions that are handy to have defined on data Symbol type that Rascal uses.
+		* ::confllicts
+			Functions that solve the conflicts that arise in the machines
+	* src::grammars
+		Some grammars to test the functionality on
+	* src::symbols
+		Files that have functions on Symbol datatype that Rascal uses
+	* src::Main
+		Main function that calls all the appropriate functions, here you can choose a grammar and type of output. Shows how to use the rest
+	* src::Grammar2Highlighter
+		Toplevel-function that calls the rest, this could be called from the terminal
+	* src::TerminalRunCode
+		Some examples used for testing that could be copied and pasted in the terminal
+
