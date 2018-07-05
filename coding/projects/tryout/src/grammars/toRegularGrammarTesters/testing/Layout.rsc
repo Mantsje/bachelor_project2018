@@ -1,4 +1,4 @@
-module grammars::expressions::testing::Layout
+module grammars::toRegularGrammarTesters::testing::Layout
 
 /* Test for checking performance under multiple strongly connected components
  *

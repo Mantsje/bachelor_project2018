@@ -1,4 +1,4 @@
-module grammars::expressions::testing::Labels
+module grammars::toRegularGrammarTesters::testing::Labels
 
 /* Test for checking performance when items have labels
  *
@@ -11,6 +11,6 @@ start syntax E
 	= E lh "+" plus E rh
 	//= E "+" E
 	| rule_a: "a" 
-	//| "a" 
+	| rule_comb: "combo" comb 
 	;
 	

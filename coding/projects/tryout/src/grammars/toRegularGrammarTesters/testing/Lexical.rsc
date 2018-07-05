@@ -1,4 +1,4 @@
-module grammars::expressions::testing::Lexical
+module grammars::toRegularGrammarTesters::testing::Lexical
 
 /* Test for checking performance with lexical elements instead of only syntax
  *

@@ -1,4 +1,4 @@
-module grammars::expressions::testing::Keywords
+module grammars::toRegularGrammarTesters::testing::Keywords
 
 /* Test for checking performance when keywords are present
  * 
@@ -16,7 +16,7 @@ module grammars::expressions::testing::Keywords
  
  lexical Id 
  	= T [a-z]+ \ Standard 
- 	| T T;
+ 	| "id";
  
  keyword Standard = @category="keywords" ("for"|"if"|"else"|"while"|"do");
  

@@ -1,0 +1,32 @@
+% Chapter Template
+
+\chapter{Discussion} % Main chapter title
+
+\label{chap:discussion} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
+
+\section{Strong points}
+\subsection{Algorithm}
+The algorithm fails to serve its purpose and therefore it has few strong points.The things that are strong about the algorithm is that the way of embedding information is at the right position. It does not ask the grammar-writer to write a separate part additionally to the grammar, but it asks extra information about the grammar. If the corresponding algorithm using this extra information (even if the information would be of a different kind), then generating a highlighter really comes from the grammar and part of the process of creating grammars instead of a separate programming task as a whole.\\
+The complexity of the components of the algorithm are also quite good. Usually linear with respect to the size of the input-grammar. Except for the solving of conflicts and the standard $NFA2DFA$ algorithm. This gives hope for other approaches being able to tackle this problem, even for large grammars.
+
+\subsection{Implementation}
+The individual parts of the algorithm find use in multiple subjects (Graph theory, language engineering, etc). Therefore implementing all these separate parts were not a waste of time. Rascal did not have functions for computing strongly connected components, nor a highlighter datatype. These and others are examples of things that were created in the process of this algorithm, but reusable for other purposes. A complete list would also include Mohri and Nederhof's algorithm, the statemachine datatype, the $ToPlainGrammar$ functions and the $grammar2graph$-module.\\
+Another strong point is the fact that the parts of the highlighters that do work benefit from the parser like behaviour. In handwritten highlighters you often have to delimit matches with word endings (\data{\\b}). These make sure that words like "for" inside therefore do not get highlighted. The generated highlighters do not have this problem since it knows thanks to the context that its parsing something that is not a keyword.
+
+\pagebreak
+\section{Weak points}
+\subsection{Algorithm}
+Due to the nature of state-based syntax highlighters (in at least Sublime) the approach taken will often crash on encountering end-of-lines. This leads to premature popping of contexts and bad highlighting.\\
+Secondly, the above error occurs from using lookahead in the highlighter to determine what to do next. This is generally okay, since other highlighters do this as well, however one should be careful in using this. Especially lookbehind and negative lookahead or behind are dangerous to use without an actual match. Since \data{not(something)} is true for lots of cases (E.G. \data{'(?!for)'} returns true for empty string). 
+Thirdly, the algorithm to resolve conflicts in the generated statemachines is very inefficient. So bad that for larger grammars the algorithm will take too long to complete. Making it useless on larger grammars.\\\\
+Finally, all of the above (and several other) issues with the algorithm would be solved if the algorithm would not induce the parser-like behaviour of the highlighters. Stopping the literal parsing removes lots of the matching and lookahead regular expressions which always results in less possible errors. The generating of machines with all the conflicts is not needed if the highlighter does not care about most of the grammar. These machines will not be generated and therefore no infinite waiting for conflict resolution. If the highlighter simply ignores useless input then also popping on end-of-lines will occur less or not at all.
+
+\subsection{Implementation}
+There are also a number of things to be said about the implementation. The realization that the approach would not work came too late and therefore there was no time to retry a different approach. Because of this the code for $ToContexts$ was not written in a proper manner. Long functions and lots of long lines to just get it to work. Time became an issue here and therefore the module $ToContexts$ suffered.\\
+Another weak point about the implementation is the way that scopes are saved and then reapplied to the final contexts. As mentioned before the implementation only allows one single context for a single token, wherever it occurs in the grammar. This is not desirable because of described reasons.\\
+Finally there is the conflict resolution algorithm substituting the non-terminal tokens on arcs of the machines. If this non-terminal had a scope assigned to it, this information is lost in the process. There should be a better way of keeping track where and to what which information belongs.
+
+\pagebreak
+\section{Overall}
+The developed algorithm does a poor job at solving the problem, however it generates a sea of information on the topic and nature of the problem. I started off with no knowledge of state-based highlighters and how they work, nor any prior experience in this domain. This makes anticipating future problems very hard. Especially since all the sub-steps seem to work at first, however only in the end it becomes apparent that certain errors slipped in along the way. After this thesis it is clear that this approach does not work and why it does not work. Due to limitations in time there was no time to revert the changes and take a different approach.\\
+This thesis and research shows that this approach is not the way to go as it cannot produce proper highlighters for even simple grammars. This is largely due to the parser-like nature of the generated highlighters. I think that fixing this, together with a slightly different way of embedding information could help future researchers a great deal in tackling the same problem once again, but from a different angle. In this new approach much of the created algorithm can be reused in one way or another, paving the path for future solutions to the problem at hand.

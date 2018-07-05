@@ -1,0 +1,20 @@
+keyword MyKeywords =
+  = @@Context="keyword.flow.conditional">@ "else" 
+  | @@Context="keyword.flow.conditional">@ "if" 
+  | @@Context="keyword.flow.conditional">@ "fi" 
+  | @@Context="keyword.flow.conditional">@ "then" 
+  ;
+
+layout MyLayout  = [\t-\n \a0C-\a0D \ ]*;
+
+lexical Identifier = [a-z] !<< [a-z]+ !>> [a-z] \ MyKeywords;
+
+syntax Expression
+  = @@Context="constant.language">@ "null" 
+  | Identifier 
+  | bracket "(" Expression ")" 
+  | @@Context="null keyword.operator.arithmetic null">@
+    Expression "*" Expression 
+  | Expression "+" Expression 
+  | Expression "-" Expression 
+  ;

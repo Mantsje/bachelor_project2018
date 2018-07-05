@@ -1,0 +1,28 @@
+% Chapter Template
+
+\chapter{Future \& Related Work} % Main chapter title
+
+\label{chap:futurework} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
+
+
+\section{Related Work}
+Since this project builds on top of many different, relatively easy, concepts there is tons of research already performed on the steps to take for the algorithm. There are a number of things certain.
+
+\subsection{Regular approximations}
+The first being that some sort of translation from $CFG$ towards a more regular structure is needed. This is because the state-based highlighters are simple structures that can handle little more than state machines. The algorithm described in \cite{MohriNederhof} proved unsuited for the problem due to the incapability of handling nested structures. This is more due to the translation to state machines than thanks to the described transformation. So some alternatives are needed for which I refer to \cite{evans1997approximating} and \cite{pereira1991finite}.
+
+\subsection{State-based highlighters}
+Secondly there needs to be a target highlighter. There is little information on these as every editor uses their own version, however many of them rely on some form of YAML. As a starting point I refer to \cite{website:SublimeSyntax} and \cite{website:TextmateSyntax}.
+
+\pagebreak
+\section{Future Work}
+In this section I will describe a number of ideas for future research into the research-question. As the problem is not solved I will focus on ideas to solve this problem and less on follow-up research for after this problem.\\\\
+The first and foremost problem to be solved is to prevent the parser-like behaviour. There needs to be a more general approach such that the highlighters keep highlighting when syntax errors occur. The simplest approach would be to make a number of contexts that highlight specific cases and to include all of these in the main context. This translates to something like a context for keywords, a (number of) context(s) to highlight strings, same for comments, etc. Then from the main context include all starting-contexts for these concepts. Possible problems for this approach could be that it becomes hard to determine when to nest contexts and how to do this nesting. Think of the example of function-definition identifiers getting a different colour from variable declarations.\\
+A second idea could be to embed slightly different information from before. Instead of assigning scopes to the tokens, it might help to let the grammar-writer denote the starting and ending delimiters of a scope. Much like TextMate does in its highlighters. Taking this approach removes the passive popping of contexts because nothing matches, into a more active popping of contexts. Being: If match this, then pop, else stay inside context.\\\\
+There is just a general different approach needed to tackle the problem. In future work there might not be a lot of use for the strongly regular grammars either. This is due to the fact that in converting $CFG$s to regular grammars you lose guarantees like bracket balancing. This is something that should never be lost for the problem at hand as state-based highlighters are easily capable of circumventing this problem by using the context-stack. So instead of converting the grammar stepwise to other versions and structures I believe the algorithm should look at the original grammar all the time and try to retrieve the relevant parts from it using this in the generation of a highlighter. So methods for identifying starting and ending delimiters, nested structures and other difficult cases.\\
+For the small example in Rascal below this could mean get all keywords and make a context. On opening comment keep colouring everything as a comment until you match the corresponding close. This would result in highlighters that would probably not be as good as a handwritten one, but could do quite a proper job at approximating them without the need for knowledge of the original grammar. 
+\begin{lstlisting}[language=RascalGrammar]
+keyword Keywords = "for" | "if" | "else" | "while" | "do";
+lexical Comment = @@Context="comment.begin null comment.end">@ "/*" ![*] "*/";
+
+\end{lstlisting}

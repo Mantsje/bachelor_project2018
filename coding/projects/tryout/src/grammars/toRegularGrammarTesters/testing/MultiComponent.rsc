@@ -1,4 +1,4 @@
-module grammars::expressions::testing::MultiComponent
+module grammars::toRegularGrammarTesters::testing::MultiComponent
 
 /* Test for checking performance under multiple strongly connected components
  * Seems to work fine
@@ -8,12 +8,12 @@ module grammars::expressions::testing::MultiComponent
  *  Connected
  */
  
- start syntax A
+ start syntax E
  	= "a" B
  	;
  	
  syntax B
- 	= "b" A "e"
+ 	= "b" E "e"
  	| "f"
  	| C
  	;

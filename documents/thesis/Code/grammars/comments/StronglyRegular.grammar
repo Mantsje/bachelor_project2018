@@ -1,0 +1,35 @@
+syntax ComChar_Comment_ALT_end =
+  ComChar_Comment_ALT_STAR 
+  ;
+
+lexical ComChar =
+  ![* /] 
+  | [*] !>> [/] 
+  | [/] !>> [*] 
+  ;
+
+lexical Comment_end 
+  =
+  | ComChar_Comment_ALT_end 
+  ;
+
+lexical Comment =
+  "/*" ComChar_Comment_ALT_STAR 
+  ;
+
+syntax ComChar_Comment_ALT =
+  Comment 
+  | ComChar ComChar_Comment_ALT_end 
+  ;
+
+start syntax C = Comment;
+
+lexical ComChar_Comment_ALT_STAR_end =
+  "*/" Comment_end 
+  | ComChar_Comment_ALT_STAR_end 
+  ;
+
+lexical ComChar_Comment_ALT_STAR =
+  ComChar_Comment_ALT 
+  | ComChar_Comment_ALT_STAR_end 
+  ;

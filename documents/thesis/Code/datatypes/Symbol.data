@@ -1,0 +1,25 @@
+data Symbol
+	= \start(Symbol symbol)  
+	
+	| \sort(str name)
+	| \lex(str name)
+	| \layouts(str name)
+	| \keywords(str name)
+	| \parameterized-sort(str name, list[Symbol] parameters)
+	| \parameterized-lex(str name, list[Symbol] parameters)
+
+	| \lit(str string)
+	| \cilit(str string)
+	| \char-class(list[CharRange] ranges)
+
+	| \empty()
+	| \opt(Symbol symbol)
+	| \iter(Symbol symbol)
+	| \iter-star(Symbol symbol)
+	| \iter-seps(Symbol symbol, list[Symbol] separators)
+	| \iter-star-seps(Symbol symbol, list[Symbol] separators)
+	| \alt(set[Symbol] alternatives)
+	| \seq(list[Symbol] symbols)
+
+	| \conditional(Symbol symbol, set[Condition] conditions)
+	;

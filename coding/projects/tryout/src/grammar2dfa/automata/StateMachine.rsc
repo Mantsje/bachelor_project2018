@@ -1,19 +1,14 @@
 module grammar2dfa::automata::StateMachine
 
-import grammar2dfa::symbols::SymbolToString;
+import symbols::SymbolToString;
 import Prelude;
 
 /* *********** *********** defs *********** *********** */
 
 alias State = str;
 alias Token = Symbol;
-alias DeltaFunction = rel[State, Token, State];
-alias Transition = tuple[State, Token, State];
-
-//New symbol to show an epsilon transition
-//probably doable with \empty(), but just in case
-data Symbol
-	= \eps();
+alias DeltaFunction = rel[State from, Token token, State to];
+alias Transition = tuple[State from, Token token, State to];
 
 data StateMachine
 	= \sm-dfa(DeltaFunction transitions, State startState, set[State] finalStates)
@@ -33,7 +28,7 @@ set[Transition] getTransitionsOfState(StateMachine fa, State s)
 	= {<s, tup[0], tup[1]> | tup <- fa.transitions[s]};
 
 set[State] getStates(StateMachine fa)
-	= ({} | it + t[0] + t[2] | t <- fa.transitions);
+	= ({} | it + t[0] + t[2] | t <- fa.transitions) + fa.startState + fa.finalStates;
 	
 	
 /* *********** *********** printing *********** *********** */
@@ -49,12 +44,12 @@ void printStateMachine(StateMachine fa) {
 
 void printStateMachineForGenerator(StateMachine fa) {
 	set[tuple[str, str]] illegal = {
-									<"(", "P_OP">, 
-									<")", "P_CL">, 
+									//<"(", "P_OP">, 
+									//<")", "P_CL">, 
 									//<"[", "B_OP">,
 									//<"]", "B_CL">,
-									<"{", "C_OP">,
-									<"}", "C_CL">,
+									//<"{", "C_OP">,
+									//<"}", "C_CL">,
 									//<"+", "PLUS">, 
 									//<"-", "DASH">, 
 									//<"*", "STAR">, 
@@ -64,12 +59,13 @@ void printStateMachineForGenerator(StateMachine fa) {
 									<",", "COMMA">,
 									//<".", "DOT">, 
 									<"=", "EQUAL">, 
-									<"?", "QMARK">, 
+									//<"?", "QMARK">, 
 									//<"!", "EXCL">, 
-									//<"/", "SLASH">, 
+									//<"/", "SLASH">,
+									//<"\\", "BSLASH">, 
 									<"\"", "DQUOTE">,
-									//<"\'", "SQUOTE">,
-									//<":", "COLON">,
+									<"\'", "SQUOTE">,
+									<":", "COLON">,
 									//<"|", "VBAR">, 
 									//<"`", "BTICK">,
 									//<"_", "UNSCR">, 

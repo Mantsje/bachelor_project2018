@@ -1,0 +1,41 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\defcounter {refsection}{0}\relax 
+\select@language {english}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Strongly connected components}}{3}{figure.caption.17}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Graph of the example grammar}}{15}{figure.caption.145}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Graph of the strongly connected components of the example grammar}}{16}{figure.caption.167}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces DFA for Statement of the example grammar}}{17}{figure.caption.168}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Conflicts in a graph}}{18}{figure.caption.170}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Conflict resolving NFA to DFA}}{19}{figure.caption.172}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces DFA for Comment}}{44}{figure.caption.598}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Generated highlighter results for Pico grammar}}{47}{figure.caption.630}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Hand-written highlighter results for Pico grammar}}{48}{figure.caption.631}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {C.1}{\ignorespaces NFA for Expression}}{68}{figure.caption.987}
+\contentsline {figure}{\numberline {C.2}{\ignorespaces DFA for Expresion}}{69}{figure.caption.989}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {D.1}{\ignorespaces NFA for Comment}}{73}{figure.caption.1065}
+\contentsline {figure}{\numberline {D.2}{\ignorespaces DFA for Comment}}{73}{figure.caption.1067}
+\contentsline {figure}{\numberline {D.3}{\ignorespaces generated highlighter results for NestedComments grammar}}{74}{figure.caption.1069}
+\contentsline {figure}{\numberline {D.4}{\ignorespaces Hand-written highlighter results for NestedComments grammar}}{74}{figure.caption.1071}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {E.1}{\ignorespaces NFA for StringLiteral}}{76}{figure.caption.1126}
+\contentsline {figure}{\numberline {E.2}{\ignorespaces DFA for StringLiteral}}{76}{figure.caption.1128}
+\contentsline {figure}{\numberline {E.3}{\ignorespaces Generated highlighter results for StringInterpolation grammar}}{77}{figure.caption.1130}
+\contentsline {figure}{\numberline {E.4}{\ignorespaces Hand-written highlighter results for StringInterpolation grammar}}{77}{figure.caption.1132}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {F.1}{\ignorespaces NFA of WhitespaceAndComment}}{84}{figure.caption.1369}
+\contentsline {figure}{\numberline {F.2}{\ignorespaces DFA of WhitespaceAndComment}}{84}{figure.caption.1371}
+\contentsline {figure}{\numberline {F.3}{\ignorespaces Generated highlighter results for Pico grammar}}{85}{figure.caption.1373}
+\contentsline {figure}{\numberline {F.4}{\ignorespaces Generated highlighter results for Pico grammar with syntax error}}{85}{figure.caption.1375}
+\contentsline {figure}{\numberline {F.5}{\ignorespaces Hand-written highlighter results for Pico grammar}}{86}{figure.caption.1377}

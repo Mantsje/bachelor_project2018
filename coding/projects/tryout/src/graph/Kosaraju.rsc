@@ -1,10 +1,7 @@
 module graph::Kosaraju
 
-import Map;
-import Relation;
+import Prelude;
 import analysis::graphs::Graph;
-import Set;
-import List;
 
 private tuple[list[&T], set[&T]] visitNode(Graph[&T] G, set[&T] visited, &T u) {
 	list[&T] L = [];
@@ -25,7 +22,9 @@ private tuple[map[&T, set[&T]], set[&T]] assign(Graph[&T] G, Graph[&T] inverted,
 		if (root in components) components[root] += u; else components[root] = {u};
 		passed += u;
 		for (v <- inverted[u]) {
-			<components, passed> += assign(G, inverted, v, root, components, passed);
+			<sub_components, sub_passed> = assign(G, inverted, v, root, components, passed);
+			components += sub_components;
+			passed += sub_passed;
 		}
 	}
 	return <components, passed>;
@@ -53,7 +52,9 @@ public set[set[&T]] stronglyConnectedComponents(Graph[&T] G) {
 	set[&T] passed = {};
 	Graph[&T] inverted = invert(G);
 	for (u <- L) {
-		<components, passed> += assign(G, inverted, u, u, components, passed);
+		<sub_components, sub_passed> = assign(G, inverted, u, u, components, passed);
+		components += sub_components;
+		passed += sub_passed;
 	}
 	return range(components);
 }

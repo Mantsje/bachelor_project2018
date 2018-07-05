@@ -1,0 +1,32 @@
+//After
+syntax Expression
+  = @@Context="constant.language">@ "null" 
+  | Identifier 
+  | bracket "(" Expression ")" 
+  | @@Context="null keyword.operator.arithmetic null">@
+    Expression "*" Expression 
+  | Expression "+" Expression 
+  | Expression "-" Expression 
+  ;
+/* ------------------------------------------------------- */
+//Before
+syntax Declarations 
+  = @@Context="keyword.declaration null">@ "declare" {IdType ","}* ";" 
+  ;  
+
+//After
+syntax Declarations
+  = @@Context="keyword.declaration null">@ "declare" IdType__","__STARSEPS ";" 
+  ;
+
+syntax IdType__","__STARSEPS
+  = IdType IdType__","__STARSEPS_TAIL 
+  | 
+  ;
+
+syntax IdType__","__STARSEPS_TAIL
+  = "," IdType__","__STARSEPS 
+  |
+  ;
+
+syntax IdType = Id ":" Type;

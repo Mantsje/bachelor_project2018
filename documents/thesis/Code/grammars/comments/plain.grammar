@@ -1,0 +1,23 @@
+lexical ComChar =
+  ![* /] 
+  | [*] !>> [/] 
+  | [/] !>> [*] 
+  ;
+
+lexical Comment =
+  "/*" ComChar_Comment_ALT_STAR "*/" 
+  ;
+
+syntax ComChar_Comment_ALT =
+  ComChar 
+  | Comment 
+  ;
+
+start syntax C 
+  = @@Context="comment.block">@ Comment 
+  ;
+
+lexical ComChar_Comment_ALT_STAR =
+  ComChar_Comment_ALT ComChar_Comment_ALT_STAR 
+  | 
+  ;

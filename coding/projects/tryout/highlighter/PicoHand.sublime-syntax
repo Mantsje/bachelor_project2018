@@ -1,0 +1,61 @@
+%YAML 1.2
+---
+
+name: PicoHand
+file_extensions: [pico]
+scope: source.pico
+
+variables:
+  conditional:  '\b(do|while|od)\b'
+  flow:         '\b(if|then|else|fi)\b'
+  declaration:  '\b(begin|end|declare)\b'
+  types:        '\b(natural|string|nil-type)\b'
+  natural:      '\b[0-9]+\b'
+  id:           '([a-z][a-z0-9]*)(?![a-z0-9])'
+
+contexts:
+
+  Keyword:
+    - match: '{{conditional}}'
+      scope: keyword.control.flow
+    - match: '{{flow}}'
+      scope: keyword.control.flow
+    - match: '{{declaration}}'
+      scope: keyword.declaration
+
+  Type: 
+    - match: '{{types}}'
+      scope: storage.type
+
+  Natural: 
+    - match: '{{natural}}'
+      scope: constant.numeric.integer
+
+  String:
+    - match: '\"'
+      push: [InString]
+
+  InString:
+    - meta_scope: string.quoted.double
+    - meta_include_prototype: false
+    - match: '\"'
+      pop: true
+
+  InComment:
+    - meta_scope: comment.block
+    - match: '(%)'
+      pop: true
+
+  main:
+    - meta_scope: main
+    - include: Keyword
+    - include: Type
+    - include: Natural 
+    - include: String 
+
+  prototype:
+    - meta_scope: prototype
+    - match: '(%%)([^\n]*)$'
+      scope: comment.line 
+    - match: '(%)'
+      push: [InComment]

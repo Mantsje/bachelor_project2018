@@ -1,4 +1,4 @@
-module grammars::expressions::Mohri
+module grammars::toRegularGrammarTesters::Mohri
 
 /* Produces expected 14 - different rules
  * No specialties, simple easy to read grammar

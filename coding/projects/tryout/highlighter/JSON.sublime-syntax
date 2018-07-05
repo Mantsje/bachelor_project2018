@@ -1,0 +1,723 @@
+%YAML 1.2
+---
+
+name: JSON
+file_extensions: [json]
+scope: source.json
+
+contexts:
+  Array_0:
+    - meta_scope: Array_0
+    - match: '(\[)'
+      set: [Array_1]
+
+
+  Array_1:
+    - meta_scope: Array_1
+    - match: '(null)'
+      set: [Array_3]
+    - match: '(?=(([\x{2D}])?))'
+      set: [Array_7, NumericLiteral_0]
+    - match: '(true)'
+      set: [Array_2]
+    - match: '(?=(\"))'
+      set: [Array_5, StringLiteral_0]
+    - match: '(false)'
+      set: [Array_4]
+    - match: '(\])'
+      set: [Array_6]
+    - match: '(\[)'
+      set: [Array_1]
+    - match: '(\{)'
+      set: [Array_8]
+
+
+  Array_10:
+    - meta_scope: Array_10
+    - match: '(\})'
+      set: [Array_10]
+    - match: '(\,)'
+      set: [Array_9]
+    - match: '(?!((\,)|(\})|(\])))'
+      pop: true
+    - match: '(\])'
+      set: [Array_6]
+
+
+  Array_11:
+    - meta_scope: Array_11
+    - match: '(\})'
+      set: [Array_10]
+    - match: '(\,)'
+      set: [Array_9]
+    - match: '(:)'
+      set: [Array_13]
+    - match: '(\])'
+      set: [Array_6]
+
+
+  Array_12:
+    - meta_scope: Array_12
+    - match: '(:)'
+      set: [Array_13]
+
+
+  Array_13:
+    - meta_scope: Array_13
+    - match: '(null)'
+      set: [Array_3]
+    - match: '(?=(([\x{2D}])?))'
+      set: [Array_7, NumericLiteral_0]
+    - match: '(true)'
+      set: [Array_2]
+    - match: '(?=(\"))'
+      set: [Array_5, StringLiteral_0]
+    - match: '(false)'
+      set: [Array_4]
+    - match: '(\[)'
+      set: [Array_1]
+    - match: '(\{)'
+      set: [Array_8]
+
+
+  Array_2:
+    - meta_scope: Array_2
+    - match: '(\})'
+      set: [Array_10]
+    - match: '(\,)'
+      set: [Array_9]
+    - match: '(\])'
+      set: [Array_6]
+
+
+  Array_3:
+    - meta_scope: Array_3
+    - match: '(\})'
+      set: [Array_10]
+    - match: '(\,)'
+      set: [Array_9]
+    - match: '(\])'
+      set: [Array_6]
+
+
+  Array_4:
+    - meta_scope: Array_4
+    - match: '(\})'
+      set: [Array_10]
+    - match: '(\,)'
+      set: [Array_9]
+    - match: '(\])'
+      set: [Array_6]
+
+
+  Array_5:
+    - meta_scope: Array_5
+    - match: '(\})'
+      set: [Array_10]
+    - match: '(\,)'
+      set: [Array_9]
+    - match: '(\])'
+      set: [Array_6]
+
+
+  Array_6:
+    - meta_scope: Array_6
+    - match: '(\})'
+      set: [Array_10]
+    - match: '(\,)'
+      set: [Array_9]
+    - match: '(?!((\,)|(\})|(\])))'
+      pop: true
+    - match: '(\])'
+      set: [Array_6]
+
+
+  Array_7:
+    - meta_scope: Array_7
+    - match: '(\})'
+      set: [Array_10]
+    - match: '(\,)'
+      set: [Array_9]
+    - match: '(\])'
+      set: [Array_6]
+
+
+  Array_8:
+    - meta_scope: Array_8
+    - match: '(\})'
+      set: [Array_10]
+    - match: '(?=(\"))'
+      set: [Array_12, StringLiteral_0]
+
+
+  Array_9:
+    - meta_scope: Array_9
+    - match: '(\})'
+      set: [Array_10]
+    - match: '(null)'
+      set: [Array_3]
+    - match: '(?=(\"))'
+      set: [Array_11, StringLiteral_0]
+    - match: '(?=(([\x{2D}])?))'
+      set: [Array_7, NumericLiteral_0]
+    - match: '(true)'
+      set: [Array_2]
+    - match: '(false)'
+      set: [Array_4]
+    - match: '(\])'
+      set: [Array_6]
+    - match: '(\[)'
+      set: [Array_1]
+    - match: '(\{)'
+      set: [Array_8]
+
+
+  JSONText_0:
+    - meta_scope: JSONText_0
+    - match: '(?=(\{))'
+      set: [Object_0]
+    - match: '(?=(\[))'
+      set: [Array_0]
+
+
+  LAYOUT_0:
+    - meta_scope: LAYOUT_0
+    - match: '(([\x{9}-\x{A}\x{D}\x{20}])*)'
+      set: [LAYOUT_INNER_0_0]
+
+
+  LAYOUT_INNER_0_0:
+    - meta_include_prototype: false
+    - meta_scope: LAYOUT_INNER_0_0
+    - match: '((?!([\x{9}-\x{A}\x{D}\x{20}])))'
+      set: [LAYOUT_POSTCOND_0_1]
+
+
+  LAYOUT_POSTCOND_0_1:
+    - meta_include_prototype: false
+    - meta_scope: LAYOUT_POSTCOND_0_1
+    - match: ''
+      pop: true
+
+
+  NumericLiteral_0:
+    - meta_scope: NumericLiteral_0
+    - match: '(([\x{2D}])?)'
+      set: [NumericLiteral_1]
+
+
+  NumericLiteral_1:
+    - meta_scope: NumericLiteral_1
+    - match: '([\x{30}])'
+      set: [NumericLiteral_4]
+    - match: '(0)'
+      set: [NumericLiteral_INNER_0_0]
+    - match: '([\x{31}-\x{39}])'
+      set: [NumericLiteral_3]
+
+
+  NumericLiteral_10:
+    - meta_scope: NumericLiteral_10
+    - match: '(([\x{30}-\x{39}])*)'
+      set: [NumericLiteral_14]
+
+
+  NumericLiteral_11:
+    - meta_scope: NumericLiteral_11
+    - match: '(([\x{2B}\x{2D}])?)'
+      set: [NumericLiteral_17]
+
+
+  NumericLiteral_12:
+    - meta_scope: NumericLiteral_12
+    - match: '(([\x{30}-\x{39}])*)'
+      pop: true
+
+
+  NumericLiteral_13:
+    - meta_scope: NumericLiteral_13
+    - match: '(([\x{30}-\x{39}])+)'
+      pop: true
+
+
+  NumericLiteral_14:
+    - meta_scope: NumericLiteral_14
+    - match: '([\x{45}\x{65}])'
+      set: [NumericLiteral_16]
+
+
+  NumericLiteral_15:
+    - meta_scope: NumericLiteral_15
+    - match: '([\x{45}\x{65}])'
+      set: [NumericLiteral_22]
+
+
+  NumericLiteral_16:
+    - meta_scope: NumericLiteral_16
+    - match: '(([\x{2B}\x{2D}])?)'
+      set: [NumericLiteral_21]
+
+
+  NumericLiteral_17:
+    - meta_scope: NumericLiteral_17
+    - match: '(([\x{30}-\x{39}])+)'
+      pop: true
+
+
+  NumericLiteral_2:
+    - meta_scope: NumericLiteral_2
+    - match: '(?!((([\x{30}-\x{39}])*)))'
+      pop: true
+    - match: '(([\x{30}-\x{39}])*)'
+      set: [NumericLiteral_6]
+
+
+  NumericLiteral_21:
+    - meta_scope: NumericLiteral_21
+    - match: '(([\x{30}-\x{39}])+)'
+      pop: true
+
+
+  NumericLiteral_22:
+    - meta_scope: NumericLiteral_22
+    - match: '(([\x{2B}\x{2D}])?)'
+      set: [NumericLiteral_23]
+
+
+  NumericLiteral_23:
+    - meta_scope: NumericLiteral_23
+    - match: '(([\x{30}-\x{39}])+)'
+      pop: true
+
+
+  NumericLiteral_3:
+    - meta_scope: NumericLiteral_3
+    - match: '(.)'
+      set: [NumericLiteral_INNER_2_0]
+    - match: '(.)'
+      set: [NumericLiteral_5]
+    - match: '([\x{45}\x{65}])'
+      set: [NumericLiteral_7]
+    - match: '(?!((.)|(([\x{30}-\x{39}])*)|([\x{45}\x{65}])))'
+      pop: true
+    - match: '(([\x{30}-\x{39}])*)'
+      set: [NumericLiteral_6]
+    - match: '(([\x{30}-\x{39}])*)'
+      set: [NumericLiteral_INNER_1_0]
+
+
+  NumericLiteral_4:
+    - meta_scope: NumericLiteral_4
+    - match: '(.)'
+      set: [NumericLiteral_INNER_4_0]
+    - match: '(.)'
+      set: [NumericLiteral_5]
+    - match: '([\x{45}\x{65}])'
+      set: [NumericLiteral_7]
+    - match: '(([\x{30}-\x{39}])*)'
+      set: [NumericLiteral_INNER_3_0]
+
+
+  NumericLiteral_5:
+    - meta_scope: NumericLiteral_5
+    - match: '(([\x{30}-\x{39}])*)'
+      set: [NumericLiteral_15]
+
+
+  NumericLiteral_6:
+    - meta_scope: NumericLiteral_6
+    - match: '([\x{45}\x{65}])'
+      set: [NumericLiteral_11]
+    - match: '(.)'
+      set: [NumericLiteral_INNER_5_0]
+    - match: '(?!((.)|([\x{45}\x{65}])))'
+      pop: true
+    - match: '(.)'
+      set: [NumericLiteral_10]
+
+
+  NumericLiteral_7:
+    - meta_scope: NumericLiteral_7
+    - match: '(([\x{2B}\x{2D}])?)'
+      set: [NumericLiteral_13]
+
+
+  NumericLiteral_8:
+    - meta_scope: NumericLiteral_8
+    - match: '(([\x{30}-\x{39}])*)'
+      pop: true
+
+
+  NumericLiteral_INNER_0_0:
+    - meta_include_prototype: false
+    - meta_scope: NumericLiteral_INNER_0_0
+    - match: '((?!([\x{30}-\x{39}])))'
+      set: [NumericLiteral_POSTCOND_0_1]
+
+
+  NumericLiteral_INNER_1_0:
+    - meta_include_prototype: false
+    - meta_scope: NumericLiteral_INNER_1_0
+    - match: '((?!([\x{30}-\x{39}])))'
+      set: [NumericLiteral_POSTCOND_1_1]
+
+
+  NumericLiteral_INNER_2_0:
+    - meta_include_prototype: false
+    - meta_scope: NumericLiteral_INNER_2_0
+    - match: '((?!(.)))'
+      set: [NumericLiteral_POSTCOND_2_1]
+
+
+  NumericLiteral_INNER_3_0:
+    - meta_include_prototype: false
+    - meta_scope: NumericLiteral_INNER_3_0
+    - match: '((?!([\x{30}-\x{39}])))'
+      set: [NumericLiteral_POSTCOND_3_1]
+
+
+  NumericLiteral_INNER_4_0:
+    - meta_include_prototype: false
+    - meta_scope: NumericLiteral_INNER_4_0
+    - match: '((?!(.)))'
+      set: [NumericLiteral_POSTCOND_4_1]
+
+
+  NumericLiteral_INNER_5_0:
+    - meta_include_prototype: false
+    - meta_scope: NumericLiteral_INNER_5_0
+    - match: '((?!(.)))'
+      set: [NumericLiteral_POSTCOND_5_1]
+
+
+  NumericLiteral_POSTCOND_0_1:
+    - meta_include_prototype: false
+    - meta_scope: NumericLiteral_POSTCOND_0_1
+    - match: ''
+      set: [NumericLiteral_2]
+
+
+  NumericLiteral_POSTCOND_1_1:
+    - meta_include_prototype: false
+    - meta_scope: NumericLiteral_POSTCOND_1_1
+    - match: ''
+      set: [NumericLiteral_6]
+
+
+  NumericLiteral_POSTCOND_2_1:
+    - meta_include_prototype: false
+    - meta_scope: NumericLiteral_POSTCOND_2_1
+    - match: ''
+      set: [NumericLiteral_8]
+
+
+  NumericLiteral_POSTCOND_3_1:
+    - meta_include_prototype: false
+    - meta_scope: NumericLiteral_POSTCOND_3_1
+    - match: ''
+      set: [NumericLiteral_6]
+
+
+  NumericLiteral_POSTCOND_4_1:
+    - meta_include_prototype: false
+    - meta_scope: NumericLiteral_POSTCOND_4_1
+    - match: ''
+      set: [NumericLiteral_8]
+
+
+  NumericLiteral_POSTCOND_5_1:
+    - meta_include_prototype: false
+    - meta_scope: NumericLiteral_POSTCOND_5_1
+    - match: ''
+      set: [NumericLiteral_12]
+
+
+  Object_0:
+    - meta_scope: Object_0
+    - match: '(\{)'
+      set: [Object_1]
+
+
+  Object_1:
+    - meta_scope: Object_1
+    - match: '(\})'
+      set: [Object_3]
+    - match: '(?=(\"))'
+      set: [Object_2, StringLiteral_0]
+
+
+  Object_10:
+    - meta_scope: Object_10
+    - match: '(\,)'
+      set: [Object_4]
+    - match: '(\})'
+      set: [Object_3]
+    - match: '(\])'
+      set: [Object_5]
+
+
+  Object_11:
+    - meta_scope: Object_11
+    - match: '(false)'
+      set: [Object_8]
+    - match: '(\{)'
+      set: [Object_1]
+    - match: '(?=(([\x{2D}])?))'
+      set: [Object_10, NumericLiteral_0]
+    - match: '(\])'
+      set: [Object_5]
+    - match: '(\[)'
+      set: [Object_11]
+    - match: '(null)'
+      set: [Object_7]
+    - match: '(?=(\"))'
+      set: [Object_13, StringLiteral_0]
+    - match: '(true)'
+      set: [Object_6]
+
+
+  Object_12:
+    - meta_scope: Object_12
+    - match: '(false)'
+      set: [Object_8]
+    - match: '(\{)'
+      set: [Object_1]
+    - match: '(?=(([\x{2D}])?))'
+      set: [Object_10, NumericLiteral_0]
+    - match: '(\[)'
+      set: [Object_11]
+    - match: '(null)'
+      set: [Object_7]
+    - match: '(?=(\"))'
+      set: [Object_13, StringLiteral_0]
+    - match: '(true)'
+      set: [Object_6]
+
+
+  Object_13:
+    - meta_scope: Object_13
+    - match: '(\,)'
+      set: [Object_4]
+    - match: '(\})'
+      set: [Object_3]
+    - match: '(\])'
+      set: [Object_5]
+
+
+  Object_2:
+    - meta_scope: Object_2
+    - match: '(:)'
+      set: [Object_12]
+
+
+  Object_3:
+    - meta_scope: Object_3
+    - match: '(?!((\,)|(\})|(\])))'
+      pop: true
+    - match: '(\,)'
+      set: [Object_4]
+    - match: '(\})'
+      set: [Object_3]
+    - match: '(\])'
+      set: [Object_5]
+
+
+  Object_4:
+    - meta_scope: Object_4
+    - match: '(false)'
+      set: [Object_8]
+    - match: '(\{)'
+      set: [Object_1]
+    - match: '(?=(([\x{2D}])?))'
+      set: [Object_10, NumericLiteral_0]
+    - match: '(\[)'
+      set: [Object_11]
+    - match: '(null)'
+      set: [Object_7]
+    - match: '(true)'
+      set: [Object_6]
+    - match: '(?=(\"))'
+      set: [Object_9, StringLiteral_0]
+    - match: '(\})'
+      set: [Object_3]
+    - match: '(\])'
+      set: [Object_5]
+
+
+  Object_5:
+    - meta_scope: Object_5
+    - match: '(?!((\,)|(\})|(\])))'
+      pop: true
+    - match: '(\,)'
+      set: [Object_4]
+    - match: '(\})'
+      set: [Object_3]
+    - match: '(\])'
+      set: [Object_5]
+
+
+  Object_6:
+    - meta_scope: Object_6
+    - match: '(\,)'
+      set: [Object_4]
+    - match: '(\})'
+      set: [Object_3]
+    - match: '(\])'
+      set: [Object_5]
+
+
+  Object_7:
+    - meta_scope: Object_7
+    - match: '(\,)'
+      set: [Object_4]
+    - match: '(\})'
+      set: [Object_3]
+    - match: '(\])'
+      set: [Object_5]
+
+
+  Object_8:
+    - meta_scope: Object_8
+    - match: '(\,)'
+      set: [Object_4]
+    - match: '(\})'
+      set: [Object_3]
+    - match: '(\])'
+      set: [Object_5]
+
+
+  Object_9:
+    - meta_scope: Object_9
+    - match: '(:)'
+      set: [Object_12]
+    - match: '(\,)'
+      set: [Object_4]
+    - match: '(\})'
+      set: [Object_3]
+    - match: '(\])'
+      set: [Object_5]
+
+
+  StringChar_0:
+    - meta_scope: StringChar_0
+    - match: '([\x{1}-\x{21}\x{23}-\x{5B}\x{5D}-\x{10FFFF}])'
+      pop: true
+    - match: '(\\)'
+      set: [StringChar_1]
+
+
+  StringChar_1:
+    - meta_scope: StringChar_1
+    - match: '([\x{22}\x{2F}\x{5C}\x{62}\x{66}\x{6E}\x{72}\x{74}])'
+      pop: true
+    - match: '([\x{55}])'
+      set: [StringChar_3]
+    - match: '([\x{75}])'
+      set: [StringChar_4]
+
+
+  StringChar_10:
+    - meta_scope: StringChar_10
+    - match: '([\x{30}-\x{39}\x{41}-\x{46}\x{61}-\x{66}])'
+      set: [StringChar_12]
+
+
+  StringChar_11:
+    - meta_scope: StringChar_11
+    - match: '([\x{30}-\x{39}\x{41}-\x{46}\x{61}-\x{66}])'
+      set: [StringChar_13]
+
+
+  StringChar_12:
+    - meta_scope: StringChar_12
+    - match: '([\x{30}-\x{39}\x{41}-\x{46}\x{61}-\x{66}])'
+      pop: true
+
+
+  StringChar_13:
+    - meta_scope: StringChar_13
+    - match: '([\x{30}-\x{39}\x{41}-\x{46}\x{61}-\x{66}])'
+      pop: true
+
+
+  StringChar_3:
+    - meta_scope: StringChar_3
+    - match: '([\x{30}-\x{39}\x{41}-\x{46}\x{61}-\x{66}])'
+      set: [StringChar_6]
+
+
+  StringChar_4:
+    - meta_scope: StringChar_4
+    - match: '([\x{30}-\x{39}\x{41}-\x{46}\x{61}-\x{66}])'
+      set: [StringChar_7]
+
+
+  StringChar_6:
+    - meta_scope: StringChar_6
+    - match: '([\x{30}-\x{39}\x{41}-\x{46}\x{61}-\x{66}])'
+      set: [StringChar_8]
+
+
+  StringChar_7:
+    - meta_scope: StringChar_7
+    - match: '([\x{30}-\x{39}\x{41}-\x{46}\x{61}-\x{66}])'
+      set: [StringChar_11]
+
+
+  StringChar_8:
+    - meta_scope: StringChar_8
+    - match: '([\x{30}-\x{39}\x{41}-\x{46}\x{61}-\x{66}])'
+      set: [StringChar_9]
+
+
+  StringChar_9:
+    - meta_scope: StringChar_9
+    - match: '([\x{30}-\x{39}\x{41}-\x{46}\x{61}-\x{66}])'
+      set: [StringChar_10]
+
+
+  StringChar_STAR_0:
+    - meta_scope: StringChar_STAR_0
+    - match: '(?=(\\|[\x{1}-\x{21}\x{23}-\x{5B}\x{5D}-\x{10FFFF}]))'
+      set: [StringChar_STAR_1, StringChar_0]
+    - match: '(?!((?=(\\|[\x{1}-\x{21}\x{23}-\x{5B}\x{5D}-\x{10FFFF}]))))'
+      pop: true
+
+
+  StringChar_STAR_1:
+    - meta_scope: StringChar_STAR_1
+    - match: '(?=(\\|[\x{1}-\x{21}\x{23}-\x{5B}\x{5D}-\x{10FFFF}]))'
+      set: [StringChar_STAR_1, StringChar_0]
+    - match: '(?!((?=(\\|[\x{1}-\x{21}\x{23}-\x{5B}\x{5D}-\x{10FFFF}]))))'
+      pop: true
+
+
+  StringLiteral_0:
+    - meta_scope: StringLiteral_0
+    - match: '(\")'
+      set: [StringLiteral_1]
+
+
+  StringLiteral_1:
+    - meta_scope: StringLiteral_1
+    - match: '(?=(\\|[\x{1}-\x{21}\x{23}-\x{5B}\x{5D}-\x{10FFFF}]))'
+      set: [StringLiteral_2, StringChar_STAR_0]
+
+
+  StringLiteral_2:
+    - meta_scope: StringLiteral_2
+    - match: '(\")'
+      pop: true
+
+
+  main:
+    - meta_scope: main
+    - include: JSONText_0
+
+
+  prototype:
+    - meta_scope: prototype
+    - match: '(?=((([\x{9}-\x{A}\x{D}\x{20}])*)))'
+      push: [LAYOUT_0]
+
+

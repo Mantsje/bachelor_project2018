@@ -1,0 +1,9 @@
+start syntax C = @@Context="comment.block">@ Comment;
+
+lexical Comment = "/*" (ComChar | Comment)* "*/";
+	
+lexical ComChar
+	= ![*/]
+	| [*] !>> [/]
+	| [/] !>> [*]
+	;

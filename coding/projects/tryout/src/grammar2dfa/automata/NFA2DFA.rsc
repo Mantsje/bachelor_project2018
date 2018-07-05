@@ -3,6 +3,7 @@ module grammar2dfa::automata::NFA2DFA
 import Prelude;
 
 import grammar2dfa::automata::StateMachine;
+import symbols::Epsilon;
 
 /* Implementation of the traditional Powerset construction for generating a DFA from an NFA */
 
@@ -51,7 +52,7 @@ StateMachine NFA2DFA(StateMachine nfa) {
 	if (isFinalStateSet(startState, nfa.finalStates)) final_states += new_states[startState];
 	
 	stateIndex = 1;
-	set[set[State]] new_state_queue = {startState};
+	set[set[State]] new_state_queue = {startState};	
 	
 	while(!(isEmpty(new_state_queue))) {
 		<cur_state, new_state_queue> = takeOneFrom(new_state_queue);

@@ -1,0 +1,14 @@
+An actual functional example
+"now this is a string"
+this is not a string
+"this is an <interpolated> string and <it works> multiple times"
+
+"we can escape chars \< \" \> "
+"not on multiple 
+lines though since it ends the match at a $
+Then continues to <expression> the next state"
+
+" bla bla multiline interpolation < will also succeed 
+	some random interpolated stuff
+> empty strings not supported"
+

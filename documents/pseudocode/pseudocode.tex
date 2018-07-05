@@ -1,0 +1,77 @@
+\documentclass[]{article}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+
+\usepackage{geometry}
+\geometry{margin=1.5in}
+
+
+%opening
+\title{Bachelor thesis \\- \\Pseudocode}
+\author{Edser Apperloo}
+
+\makeatletter
+\def\BState{\State\hskip-\ALG@thistlm}
+\makeatother
+
+\begin{document}
+
+\maketitle
+
+\section{Grammar to Graph}
+A context-free Grammar $G$ is defined as $(V,\Sigma,P,S)$ with the following properties:
+\begin{itemize}
+	\item $V$ is an alphabet of non-terminals: $\{A, B, C, ...\}$
+	\item $\Sigma$ is an alphabet of terminals: $\{a, b, c, ...\}$
+	\item $V \cap \Sigma = \emptyset$
+	\item $P$ is a set of production rules: $\{A \to \alpha | A \in V,$ $ \alpha \in (V \cup \Sigma)^*\}$
+	\item if $(A \to \alpha) \in P$ then $A$ is the left-hand-side (\textit{lhs}) and $\alpha$ is the right-hand-side (\textit{rhs})
+	\item $S$ is the starting non-terminal of $G$: $S \in V$\\
+\end{itemize}
+A Graph $G$ is defined as $(V, E)$ with the following properties:
+\begin{itemize}
+	\item $V$ is a set of vertices in the graph
+	\item $E$ is a set of two-element tuples of vertices: $(A, B) \in E \implies A,B \in V$
+	\item if $(A,B) \in E$ then $A$ is the source and $B$ is the target\\
+\end{itemize}
+\newpage
+\noindent For our graph the non-terminals are not important so they will be omitted. This results in the following pseudo-code:\\
+
+\begin{algorithm}
+	\caption{grammar\_to\_graph}\label{grammar_to_graph}
+	\begin{algorithmic}[1]
+		\Procedure{grammar\_to\_graph}{grammar}
+		\State $V \gets grammar.V$
+		\State $E \gets \{\}$
+		\State $Graph$ $graph \gets (V, E)$
+		\ForAll {$nt \in grammar.N$}
+			\State $reachable \gets reachable\_non\_terminals(nt, grammar)$
+			\For {$r \in reachable$}
+				\State $graph.E.add((nt, r))$
+			\EndFor
+		\EndFor
+		\State $\textbf{return}$ $graph$
+		\EndProcedure
+		
+		\State
+		
+		\State\textit{/*get all non terminals reachable in 1 derivation step*/}
+		\Procedure{reachable\_non\_terminals}{nt, grammar}
+		\State $reachable \gets \{\}$
+		\State \textit{/*If properly implemented this for-loop will sum up to $O(|P|)$ instead of $O(|V| * |P|)$*/}
+		\ForAll {$\{p | p \in grammar.P \land p.lhs == nt\}$}
+			\ForAll {$\{token | token \in p.rhs \land token \in grammar.V\}$}
+				\State $reachable.add(symbol)$			
+			\EndFor
+		\EndFor
+
+
+		\State $\textbf{return}$ $reachable$
+		\EndProcedure
+	\end{algorithmic}
+\end{algorithm}
+
+
+\end{document}

@@ -1,0 +1,76 @@
+This is BibTeX, Version 0.99d (TeX Live 2013/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: main.aux
+The style file: biblatex.bst
+A level-1 auxiliary file: Chapters/Abstract.aux
+A level-1 auxiliary file: Chapters/ProblemDescription.aux
+A level-1 auxiliary file: Chapters/Background.aux
+A level-1 auxiliary file: Chapters/Algorithm.aux
+A level-1 auxiliary file: Chapters/Implementation.aux
+A level-1 auxiliary file: Chapters/Results.aux
+A level-1 auxiliary file: Chapters/Discussion.aux
+A level-1 auxiliary file: Chapters/Conclusion.aux
+A level-1 auxiliary file: Chapters/FutureWork.aux
+A level-1 auxiliary file: Appendices/AppendixGrammars.aux
+A level-1 auxiliary file: Appendices/AppendixData.aux
+A level-1 auxiliary file: Appendices/AppendixAdvanced.aux
+A level-1 auxiliary file: Appendices/AppendixComments.aux
+A level-1 auxiliary file: Appendices/AppendixStringInterp.aux
+A level-1 auxiliary file: Appendices/AppendixPico.aux
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Database file #1: main-blx.bib
+Database file #2: references.bib
+Biblatex version: 3.3
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
+You've used 11 entries,
+            6047 wiz_defined-function locations,
+            1203 strings with 10123 characters,
+and the built_in function-call counts, 32111 in all, are:
+= -- 1424
+> -- 1032
+< -- 365
++ -- 331
+- -- 320
+* -- 1916
+:= -- 1982
+add.period$ -- 0
+call.type$ -- 11
+change.case$ -- 206
+chr.to.int$ -- 34
+cite$ -- 20
+duplicate$ -- 3523
+empty$ -- 3431
+format.name$ -- 537
+if$ -- 7524
+int.to.chr$ -- 0
+int.to.str$ -- 28
+missing$ -- 0
+newline$ -- 221
+num.names$ -- 538
+pop$ -- 3270
+preamble$ -- 1
+purify$ -- 220
+quote$ -- 0
+skip$ -- 2041
+stack$ -- 0
+substring$ -- 925
+swap$ -- 1078
+text.length$ -- 275
+text.prefix$ -- 10
+top$ -- 1
+type$ -- 406
+warning$ -- 0
+while$ -- 232
+width$ -- 0
+write$ -- 209

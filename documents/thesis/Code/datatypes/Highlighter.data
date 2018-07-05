@@ -1,0 +1,35 @@
+data SHRegex
+	= \str-regex(str regex)
+	;
+
+data SyntaxHighlighter
+	= \highlighter(str name, set[str] extensions, 
+				   set[SHvar] vars, map[str, Context] contexts)
+	;
+
+data SHvar
+	= \shvar(str name, SHRegex regex);
+
+data Context
+	= \context(str name, Scope scope, set[Match] matches, 
+			   set[Context] includes, bool includePrototype=true)
+	| \main(Scope scope, set[Match] matches, set[Context] includes)
+	| \prototype(Scope scope, set[Match] matches, set[Context] includes)
+	;
+
+data Scope 
+	= \scope(str name)
+	| \meta-scope(str name)
+	| \null()
+	;
+
+data Action
+	= \push(list[str] contexts)
+	| \setact(list[str] contexts)
+	| \pop()
+	| \noact()
+	;
+	
+data Match
+	= \match(SHRegex regex, Scope scope, Action action)
+	;

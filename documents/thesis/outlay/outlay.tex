@@ -1,0 +1,114 @@
+
+Front page
+
+Abstract
+
+Introduction and Project/Problem description
+
+Background information
+%Information up front
+	What is a CFG
+	
+	What is a graph
+	
+	What is the graph of a CFG
+	
+	What types of statemachines do we have
+		Deterministic
+		Nonterministic
+		Special type of machine with non-terminals on the arcs
+	
+	What makes it strongly regular (right/left linear)
+	
+	What is a (state-based) syntax-highlighter
+		Stack of contexts
+		Contexts
+		Scopes
+		Variables
+		Matches, Regexes
+		Example. Sublime
+
+
+The Designed Algorithm
+%In general terms
+
+	Pipeline
+		Grammar -> (simplified grammar ->) Strongly Regular grammar -> NFA's per component -> DFA's per component -> Conflict resolution 
+		
+		Preserve information through the pipeline
+		
+	Simplification
+	
+	Mohri and Nederhof's algorithm to make it strongly regular
+	
+	Kaseraju's algorithm for strongly connected components
+	
+	Conflict resolution:
+		Component tree
+		Substitution algorithm
+		
+	Machines to contexts
+		
+
+Rascal Implementation
+%what challenges did we find in rascal. How i\textsl{}s it implemented.
+
+	Motivation for Rascal -> language workbench, high level. That kind of stuff
+	Rascal's grammar formalism
+		|-> might need to be in background
+	
+	Extra features to circumvent
+		removing of associativity
+		rewriting of priority rules
+		removing of labels
+		conditionals
+		(rewriting special nonterminals to new symbol (A -> B+ => A -> B-PLUS, B-Plus -> B B-Plus, B-Plus -> B))	
+	
+	Information propagation
+	
+	The Syntax-Highlighter datatype
+		How to extend this to new editors and why this is relatively easy
+	
+Results/Evaluation
+	Small example grammar S -> A B, A -> a, B -> b
+
+	The Pico grammar
+	
+	nested comments
+	
+	string interpolation
+
+	why and how is it bad. Where is it bad what does it do well and what does it not do well.
+	
+	Embedding information cannot work for nested elements since it is seen as 1 symbol:
+		> left 	( Exp "+" Exp
+				| Exp "-" Exp
+				)
+
+	Acts as parser = bad
+	
+
+
+Conclusion
+\subsection{Bad about my implementation}
+
+\subsection{Bad about the algorithm}
+not too good, salvageable parts. Feels like it should be possible to create this, just not using this approach, algorithm nor Mohri's algorithm.
+
+
+Discussion
+lookahead and stuff only in combination with other real matches
+Bad that the mohri thing came out so late. Improper written code from the point where it felt like this approach was not going to be good enough. Especially ToContexts is a mess. good salvageable parts. 
+In the beginning very non-understanding in Rascal. Got better over time, could be redone in a better more efficient way.
+	replacing machines into the new machine do not receive proper highlighting in the implementation
+
+Future work
+	Something different from Mohri
+	Try a highlighter that does not act as a parser. (maybe one start arc going to all other contexts)
+	Allow multiple scope definitions for different "editions" of the same tokens
+	Better choice in Non-Sink-States about popping
+	Other type of information to be saved to prevent parser like behaviour. more general
+
+References
+
+Appendix

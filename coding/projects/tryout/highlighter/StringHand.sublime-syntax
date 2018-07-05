@@ -1,0 +1,33 @@
+%YAML 1.2
+---
+
+name: StringHand
+file_extensions: [str]
+scope: source.str
+
+contexts:
+  # Contains no lookaheads that fail on end of line, so multiline works
+  PreString:
+    - match: '\"'
+    # Open string, push/set in string
+      set: [InString]
+
+  InString:
+    - meta_scope: string.quoted.double.str
+    - match: '\\.'
+    - match: '\<'
+    # Set here, otherwise meta_scope stays on stack 
+    # and interpolation keeps colouring)
+      set: [Interpolated]
+    - match: '\"'
+      # End string
+      pop: true
+
+  Interpolated:
+    - match: '\>'
+    # end interpolation, back to string
+      set: [InString]
+
+  main:
+    - meta_scope: main
+    - include: PreString

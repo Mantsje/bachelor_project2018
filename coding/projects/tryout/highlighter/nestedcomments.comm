@@ -1,0 +1,12 @@
+
+something not comment
+
+/* start of first comment 
+	works fine, even multiline
+	/* nested comment */
+	let's end it here */
+
+Well, it continues 
+
+*/ */ /* open - close */ /* op /* op /* op cl*/cl*/ cl**/
+no matter what you do

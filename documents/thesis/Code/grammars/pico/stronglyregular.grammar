@@ -1,0 +1,101 @@
+syntax Type =
+  "nil-type" 
+  | "natural" 
+  | "string" 
+  ;
+
+syntax Statement__";"__STARSEPS_end =
+  "od" Statement_end 
+  | Statement__";"__STARSEPS_TAIL_end 
+  | 
+  | "fi" Statement_end 
+  | "else" Statement__";"__STARSEPS 
+  ;
+
+lexical Id =
+  (  [a-z]  [0-9 a-z]*  ) !>> [0-9 a-z] 
+  ;
+
+syntax Expression_end =
+  "-" Expression 
+  | ")" Expression_end 
+  | "+" Expression 
+  | "||" Expression 
+  | Expression_end 
+  | 
+  ;
+
+syntax Statement_end =
+  Statement__";"__STARSEPS_TAIL 
+  ;
+
+lexical WhitespaceAndComment =
+  "%%" ![\n]*$ 
+  | "%" ![%]+ "%" 
+  | [\t-\n \a0D \ ] 
+  ;
+
+syntax Statement =
+  "while" Expression "do" Statement__";"__STARSEPS 
+  | "if" Expression "then" Statement__";"__STARSEPS 
+  | Id ":=" Expression Statement_end 
+  ;
+
+syntax Statement__";"__STARSEPS_TAIL =
+  ";" Statement__";"__STARSEPS 
+  | Statement__";"__STARSEPS_TAIL_end 
+  ;
+
+syntax IdType__","__STARSEPS_TAIL 
+  =
+  | "," IdType__","__STARSEPS 
+  ;
+
+syntax Declarations =
+  "declare" IdType__","__STARSEPS ";" 
+  ;
+
+syntax Expression =
+  "(" Expression 
+  | Natural Expression_end 
+  | String Expression_end 
+  | Id Expression_end 
+  | Expression 
+  ;
+
+syntax IdType =
+  Id ":" Type 
+  ;
+
+layout Layout  =
+  WhitespaceAndComment_STAR !>> [\t-\n \a0D \  %] 
+  ;
+
+syntax IdType__","__STARSEPS =
+  IdType IdType__","__STARSEPS_TAIL 
+  | 
+  ;
+
+syntax Statement__";"__STARSEPS_TAIL_end =
+  Statement__";"__STARSEPS_end 
+  ;
+
+syntax Statement__";"__STARSEPS =
+  Statement 
+  | Statement__";"__STARSEPS_end 
+  ;
+
+lexical Natural =
+  [0-9]+ 
+  ;
+
+start syntax Program =
+  "begin" Declarations Statement__";"__STARSEPS "end" 
+  ;
+
+lexical WhitespaceAndComment_STAR =
+  WhitespaceAndComment WhitespaceAndComment_STAR 
+  | 
+  ;
+
+lexical String = "\"" ![\"]* "\"";

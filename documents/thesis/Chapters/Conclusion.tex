@@ -1,0 +1,36 @@
+% Chapter Template
+
+\chapter{Conclusion} % Main chapter title
+
+\label{chap:conclusion} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
+
+%----------------------------------------------------------------------------------------
+%	SECTION 1																			|
+%----------------------------------------------------------------------------------------
+
+\section{Answers to subquestions}
+In \ref{sec:problemdef:sub} a number of subquestions were posed. These questions are useful in answering the main question of this thesis. The posed questions and their respective answers are:
+\begin{enumerate}
+	\item[\textit{1.}] How to embed highlighting information in a context-free grammar?
+	\\\textbf{\textit{The Algorithm:}}\\
+	The idea is to assign scopes (or some other information) to the tokens of production rules. It is intuitive and easy to do, however it might be a good idea to allow certain generalizations, like assigning information to a Symbol as a whole, meaning to all Symbols of all rules at the right-hand side. The embedded information is easy to extract and is relevant for the rest of the algorithm. Changes to the algorithm might enforce the type of information to be changed.
+	\\\textbf{\textit{The Implementation:}}\\
+	The grammar formalism Rascal uses nicely allows for this kind of embedding. Many types of information, not just scopes, could be embedded with this method. Implementation-wise there were also a number of things that could have been done better. For one, assigning scopes to nested Symbols was impossible. In the \nameref{chap:results} chapter a number of issues and possible solutions were posed. For example assigning to the information to different labels in Rascal would help to circumvent the nested Symbol problem. 
+	
+	\item[\textit{2.}] Can a Rascal grammar be written as the standard 4-element tuple?\\
+	The implementation of $ToPlainGrammar$ shows that this is possible and also generalizes to larger grammars. The algorithm works even on large scale programming languages. It just fails on Rascal itself because of the use of parameterized lexicals and syntax-tokens.
+	
+	\item[\textit{3.}] How to convert a context-free grammar to a regular grammar approximating the same language?\\
+	Mohri and Nederhofs transformation stood for this process. The approximation is correct and still understandable. This is important for the used algorithm, because it converts the grammar to state machines which is not generally possible for context-free grammars.
+	
+	\item[\textit{4.}] How to create useful state-machines from these approximations?\\
+	The state machines generated from the transformed grammars are good for accepting the same language. Again however, this contributes to the parser-like behaviour of the algorithm. They theoretically accept the same language, implementing this is a proper manner introduces errors that are similar to shift-reduce and reduce-reduce conflicts.
+	
+\pagebreak	\item[\textit{5.}] How to map these machines to an actual state-based syntax highlighter?\\
+	The final step is the described mapping algorithm. This works for general cases, but encounters lots of problems for end-of-line characters in Sublime. These cause unintentional popping of contexts, breaking the "parser" that the highlighters try to be. This resulting in bad highlighters. On top of this the machines tend to be quite larger, creating enormous highlighters that are hard to follow by hand and to debug.
+\end{enumerate} 
+
+\section{How can we derive state-based highlighters from context-free grammars?}
+The question posed at the beginning could be rewritten after this thesis. This thesis has presented a possible approach to this problem and concluded that this is not the correct one. This thesis does not answer the question as a whole, but crosses off the described approach whilst generating lots of new information on the subject.\\
+The generated highlighters have trouble navigating past end-of-line characters and act more as parsers than as highlighters. The highlighters perform badly and are for described reasons incapable of highlighting certain recursive structures like nested comments. I think it is still possible to generate highlighters from their definitions, however there is a need for a different algorithm and possibly other embedded information to support this new algorithm.\\\\
+I have presented a possible approach to generating state based highlighters from Rascal context-free grammars using a regular approximation algorithm as a starting point. I conclude that, for various reasons, this approach is not capable of creating proper highlighters. Reasons include parser-like behaviour, unintentional popping of contexts on end-of-line characters and incapability of properly highlighting recursive structures. 

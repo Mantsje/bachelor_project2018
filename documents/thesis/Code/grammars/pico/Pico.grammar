@@ -1,0 +1,47 @@
+start syntax Program 
+  = @@Context="keyword.control.flow null null keyword.control.flow">@ 
+    "begin" Declarations {Statement ";"}* "end" ;
+
+syntax Declarations 
+  = @@Context="keyword.declaration null">@ "declare" {IdType ","}* ";" 
+  ;  
+ 
+syntax IdType = Id ":" Type;
+
+syntax Statement 
+  = Id ":=" Expression 
+  | @@Context="keyword.control.flow null keyword.control.flow null keyword.control.flow null  keyword.control.flow">@ 
+ "if" Expression "then" {Statement ";"}*  "else" {Statement ";"}* "fi"
+  | "if" Expression "then" {Statement ";"}*  "fi"
+  | @@Context="keyword.control.flow null keyword.control.flow null keyword.control.flow">@ 
+    "while" Expression "do" {Statement ";"}* "od"
+  ;  
+     
+syntax Type 
+  = @@Context="storage.type">@ "natural" 
+  | @@Context="storage.type">@ "string" 
+  | @@Context="storage.type">@ "nil-type"
+  ;
+
+syntax Expression 
+  = Id
+  | @@Context="string.quoted.double">@ String
+  | @@Context="constant.numeric.integer">@ Natural
+  | bracket "(" Expression ")"
+  > left Expression "||" Expression
+  > left ( Expression "+" Expression
+         | Expression "-" Expression
+         )
+  ;       
+
+layout Layout = WhitespaceAndComment* !>> [\ \t\n\r%];
+
+lexical WhitespaceAndComment 
+   = [\ \t\n\r]
+   | @@Context="comment.block">@ "%" ![%]+ "%"
+   | @@Context="comment.line">@ "%%" ![\n]* $
+   ;
+
+lexical Id  = ([a-z][a-z0-9]*) !>> [a-z0-9] \ Keywords;
+lexical Natural = [0-9]+ ;
+lexical String = "\"" ![\"]*  "\"";

@@ -1,0 +1,18 @@
+let { A, B} be a strongly connected component. 
+Should B+ or {B ","} be seen as inside the component?
+
+
+Is it useful to only generate stuff for rules with tags we find.
+
+Presentation for peers -> expectations?
+	what level do i present to them
+
+How much background information is needed in the thesis? Am i on the right track?
+
+What to do with layouts? -> can probably ignore them
+
+Generally: what now?
+	Structures like nested comments will dissappear when changing making dfa's for a component, since it contains a self loop
+
+
+put results in introduction and problem description?

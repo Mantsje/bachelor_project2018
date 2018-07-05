@@ -1,0 +1,19 @@
+begin
+	declare 
+		i2d : string, nat : natural, 
+		noHighlightingOnTheNextLine : nil-type
+	;
+
+	%disfunctional multiline
+	comment%
+	%If is seen as identifier and therefore not highlighted%
+	%Once it picks up on colouring the rest of the line colours quite okay%
+	%If this was divided over multiple lies it would fal because of $-problem%
+
+	if id then nat := 42 else nat := 24 fi; id := "some %% with comment token literal string";
+
+	%%fails because the rule for line-comment is lower than multiline comment% 
+	%so its never matched and always opens a multiline comment%
+
+	id := "should not be comment coloured which is good, but string coloured, which fails"
+end

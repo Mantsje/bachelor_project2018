@@ -1,0 +1,80 @@
+syntax Type 
+  = @@Context="storage.type">@ "string" 
+  | @@Context="storage.type">@ "nil-type" 
+  | @@Context="storage.type">@ "natural" 
+  ;
+
+lexical Id = ([a-z] [0-9 a-z]*) !>> [0-9 a-z];
+
+lexical WhitespaceAndComment =
+  [\t-\n \a0D \ ] 
+  | @@Context="comment.block">@ "%" ![%]+ "%" 
+  | @@Context="comment.line">@ "%%" ![\n]*$ 
+  ;
+
+syntax Statement =
+  Id ":=" Expression 
+  | @@Context="keyword.control.flow null keyword.control.flow null keyword.control.flow null keyword.control.flow">@ 
+    "if" Expression "then" Statement__";"__STARSEPS "else" Statement__";"__STARSEPS "fi" 
+  | @@Context="keyword.control.flow null keyword.control.flow null keyword.control.flow">@ 
+    "while" Expression "do" Statement__";"__STARSEPS "od" 
+  | "if" Expression "then" Statement__";"__STARSEPS "fi" 
+  ;
+
+syntax Statement__";"__STARSEPS_TAIL =
+  ";" Statement__";"__STARSEPS 
+  | 
+  ;
+
+syntax IdType__","__STARSEPS_TAIL
+  =
+  | "," IdType__","__STARSEPS 
+  ;
+
+syntax Declarations
+  = @@Context="keyword.declaration null">@ "declare" IdType__","__STARSEPS ";" 
+  ;
+  
+syntax Expression =
+  bracket "(" Expression ")" 
+  | Expression "||" Expression 
+  | @@Context="string.quoted.double">@ String 
+  | @@Context="constant.numeric.integer">@ Natural 
+  | Id 
+  | Expression "+" Expression 
+  | Expression "-" Expression 
+  ;
+
+syntax IdType =
+  Id ":" Type 
+  ;
+
+layout Layout  =
+  WhitespaceAndComment_STAR !>> [\t-\n \a0D \  %] 
+  ;
+
+syntax IdType__","__STARSEPS =
+  IdType IdType__","__STARSEPS_TAIL 
+  | 
+  ;
+
+syntax Statement__";"__STARSEPS 
+  = Statement Statement__";"__STARSEPS_TAIL 
+  | 
+  ;
+
+lexical Natural =
+  [0-9]+ 
+  ;
+
+start syntax Program
+  = @@Context="keyword.control.flow null null keyword.control.flow">@ 
+    "begin" Declarations Statement__";"__STARSEPS "end" 
+  ;
+
+lexical WhitespaceAndComment_STAR
+  =
+  | WhitespaceAndComment WhitespaceAndComment_STAR 
+  ;
+
+lexical String = "\"" ![\"]* "\"";

@@ -1,0 +1,102 @@
+%YAML 1.2
+---
+
+name: Comment
+file_extensions: [comm]
+scope: source.comm
+
+contexts:
+  C_0:
+    - meta_scope: C_0
+    - match: '(?=(\/\*))'
+      set: [Comment_0]
+
+
+  ComChar_0:
+    - meta_scope: ComChar_0
+    - match: '([\x{1}-\x{29}\x{2B}-\x{2E}\x{30}-\x{10FFFF}])'
+      pop: true
+    - match: '([\x{2A}])'
+      set: [ComChar_INNER_1_0]
+    - match: '([\x{2F}])'
+      set: [ComChar_INNER_0_0]
+
+
+  ComChar_INNER_0_0:
+    - meta_include_prototype: false
+    - meta_scope: ComChar_INNER_0_0
+    - match: '((?!([\x{2A}])))'
+      set: [ComChar_POSTCOND_0_1]
+
+
+  ComChar_INNER_1_0:
+    - meta_include_prototype: false
+    - meta_scope: ComChar_INNER_1_0
+    - match: '((?!([\x{2F}])))'
+      set: [ComChar_POSTCOND_1_1]
+
+
+  ComChar_POSTCOND_0_1:
+    - meta_include_prototype: false
+    - meta_scope: ComChar_POSTCOND_0_1
+    - match: ''
+      pop: true
+
+
+  ComChar_POSTCOND_1_1:
+    - meta_include_prototype: false
+    - meta_scope: ComChar_POSTCOND_1_1
+    - match: ''
+      pop: true
+
+
+  Comment_0:
+    - meta_scope: Comment_0
+    - match: '(\/\*)'
+      scope: comment.block
+      set: [Comment_1]
+
+
+  Comment_1:
+    - meta_scope: Comment_1
+    - match: '(?=([\x{1}-\x{29}\x{2B}-\x{2E}\x{30}-\x{10FFFF}]|[\x{2A}](?!([\x{2F}]))|[\x{2F}](?!([\x{2A}]))))'
+      set: [Comment_2, ComChar_0]
+    - match: '(\*\/)'
+      scope: comment.block
+      set: [Comment_3]
+    - match: '(\/\*)'
+      scope: comment.block
+      set: [Comment_1]
+
+
+  Comment_2:
+    - meta_scope: Comment_2
+    - match: '(?=([\x{1}-\x{29}\x{2B}-\x{2E}\x{30}-\x{10FFFF}]|[\x{2A}](?!([\x{2F}]))|[\x{2F}](?!([\x{2A}]))))'
+      set: [Comment_2, ComChar_0]
+    - match: '(\*\/)'
+      scope: comment.block
+      set: [Comment_3]
+    - match: '(\/\*)'
+      scope: comment.block
+      set: [Comment_1]
+
+
+  Comment_3:
+    - meta_scope: Comment_3
+    - match: '(?=([\x{1}-\x{29}\x{2B}-\x{2E}\x{30}-\x{10FFFF}]|[\x{2A}](?!([\x{2F}]))|[\x{2F}](?!([\x{2A}]))))'
+      set: [Comment_2, ComChar_0]
+    - match: '(?!((?=([\x{1}-\x{29}\x{2B}-\x{2E}\x{30}-\x{10FFFF}]|[\x{2A}](?!([\x{2F}]))|[\x{2F}](?!([\x{2A}]))))|(\*\/)|(\/\*)))'
+      pop: true
+    - match: '(\*\/)'
+      scope: comment.block
+      set: [Comment_3]
+    - match: '(\/\*)'
+      scope: comment.block
+      set: [Comment_1]
+
+
+  main:
+    - meta_scope: main
+    - include: C_0
+
+

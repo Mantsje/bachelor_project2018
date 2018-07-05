@@ -1,0 +1,32 @@
+% Problem Description
+
+\chapter{Project Description} % Main chapter title
+
+\label{problemdescription} % For referencing the chapter elsewhere, use \ref{} 
+
+%----------------------------------------------------------------------------------------
+
+\section{Introduction}
+Developers all over the world use their favourite editors in order to  software. One of the things all these editors tend to have in common is support for syntax highlighting. Syntax highlighting is the process of colouring certain words or sections of text in a document in order to give visual meaning to them. This is useful since humans can easily identify things by colour and the colours give an overall more structured look to an otherwise plain looking text document. Creating programs that do this highlighting for us is a development task in its own. The syntax highlighters tend to use (some form of) the underlying mathematical formalism of a programming language called the Context-Free-Grammar of this language. This is necessary in order to generate correct context-aware highlights. There are different forms of syntax-highlighters, some work with states and a simple stack much like finite state machines. Others, like the Rascal highlighter in Eclipse, use the Grammar and its parse-trees directly. Just as regular languages can not express everything context-free languages can, state-based highlighters cannot express everything that the context-free languages can. Hence, a translation step is needed.
+
+\pagebreak
+
+\section{Problem Definition}
+Creating state-based syntax highlighters for different languages is a repetitive and seemingly similar process. Many editors (e.g., VS Code, Textmate, SublimeText, Atom, ACE, CodeMirror etc.) use some implementation of these state-based highlighters. This thesis is focused on generating such highlighters from the context-free definition of the language. As suggested by my supervisor I took an algorithm for transforming a context-free grammar to a regular approximation as a starting point \parencite{MohriNederhof}. From here on this thesis will describe how to solve the following question. 
+
+\begin{center}\emph{\large How can we derive state-based highlighters from context-free grammars?}\end{center}
+The algorithm was written for Rascal and this thesis will use Rascal as the main tool to fit the algorithm to, however it is described in a general way such that it is extendable to different languages. The ultimate goal would be to be able to generate a proper highlighter for Rascal's own grammar. Which contains close to all special things you can do with Rascal's grammar formalism. A second important portion of the goal is to be able to deal with tougher highlighting tasks like nested comments and string interpolation.
+
+\subsection{Steps} \label{sec:problemdef:sub}
+In order to tackle this problem the main question is divided in a number of subquestions. Each being fairly detachable from the problem as a whole, but contributing to the final result when joined with the rest.
+
+\begin{enumerate}
+	\item[\textit{1.}] How to embed highlighting information in a context-free grammar?
+	\item[\textit{2.}] Can a Rascal grammar be written as the standard 4-element tuple?
+	\item[\textit{3.}] How to convert a context-free grammar to a regular grammar approximating the same language?
+	\item[\textit{4.}] How to create useful state-machines from these approximations?
+	\item[\textit{5.}] How to map these machines to an actual state-based syntax highlighter?
+\end{enumerate}
+
+\subsection{Performance}
+The designed algorithm is build logically and works for relatively simple cases. Once larger grammars and more difficult cases are tested a certain number of errors become apparent. The origin of these errors are identified and methods to avoid them are presented where possible.

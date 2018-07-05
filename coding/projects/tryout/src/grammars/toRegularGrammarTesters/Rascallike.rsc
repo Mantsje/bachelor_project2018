@@ -1,9 +1,10 @@
-module grammars::expressions::Rascallike
+module grammars::toRegularGrammarTesters::Rascallike
 
 import ParseTree;
 import String;
 
-layout Whitespace = [\t\f\n\r\ ]*; 
+
+layout Whitespace = [\t\f\n\r\ ]* !>> [\t\f\n\r\ ]; 
     
 lexical Number 
 	= [0-9]+("."[0-9]+)?("E"("+"|"-")?[0-9]+)?;
@@ -16,16 +17,14 @@ start syntax Exp
   > left (Exp lhs "+" Exp rhs | Exp lhs "-" Exp rhs )           
   ;
 
-  
-real eval(str txt) 								= eval(parse(#Exp, txt));
-real eval((Exp)`<Number n>`) 					= toReal("<n>");
-real eval((Exp)`(<Exp e>)`) 					= eval(e);
-real eval((Exp)`<Exp e1>^<Exp e2>`) 			= (1.0 | it * eval(e1)| x <- [0 .. eval(e2)]);
-real eval((Exp)`<Exp e1><Mul_Op op><Exp e2>`) 	= eval(op, eval(e1), eval(e2));
-real eval((Exp)`<Exp e1><Plus_Op op><Exp e2>`) 	= eval(op, eval(e1), eval(e2));
-real eval(Mul_Op op, real lhs, real rhs) {
-	if ("<op>" == "*") return lhs * rhs; else return lhs / rhs;
-}
-real eval(Plus_Op op, real lhs, real rhs) {
-	if ("<op>" == "+") return lhs + rhs; else return lhs - rhs;
-}
+
+real pow(real a, real b) = (1.0 | it * a | _ <- [0..b]);
+
+real eval((Exp)`<Number n>`) = toReal("<n>");
+real eval((Exp)`(<Exp e>)`) = eval(e);
+real eval((Exp)`<Exp e1>+<Exp e2>`) = eval(e1) + eval(e2);
+real eval((Exp)`<Exp e1>-<Exp e2>`) = eval(e1) - eval(e2);
+real eval((Exp)`<Exp e1>*<Exp e2>`) = eval(e1) * eval(e2);
+real eval((Exp)`<Exp e1>/<Exp e2>`) = eval(e1) / eval(e2);
+real eval((Exp)`<Exp e1>^<Exp e2>`) = pow(eval(e1), eval(e2));
+real eval(str input) = eval(parse(#Exp, input));

@@ -1,4 +1,4 @@
-module grammars::expressions::testing::Priority
+module grammars::toRegularGrammarTesters::testing::Priority
 
 /* Test for checking performance under priority operators in the grammar
  *
@@ -15,4 +15,3 @@ module grammars::expressions::testing::Priority
  	> E "*" E
  	> E "+" E
  	;
- 	

@@ -2,31 +2,26 @@ module grammars::Statement
 
 start syntax S 
 	= Statement
-	| FuncHead
+	//| FuncHead
 	;
 	
 syntax Statement
 	= TypeDef "=" Number ";"
-	| TypeDef ";"
+	//| TypeDef ";"
 	;	
 
-syntax FuncHead
-	= TypeDef "(" ParamList ")" "{";
-
-syntax ParamList
-	=  {TypeDef ","}+ 
-	|
-	;
+//syntax FuncHead
+//	= TypeDef "(" ParamList ")" "{";
+//
+//syntax ParamList
+//	=  {TypeDef ","}+ 
+//	|
+//	;
 
 syntax TypeDef
 	= Type Id
 	;
-
-//syntax ParamListTail 
-//	= "," Type Id ParamListTail
-//	|
-//	;
-//	
+	
 lexical Id 
 	= [a-z] !<< [a-z]+ !>> [a-z];
 

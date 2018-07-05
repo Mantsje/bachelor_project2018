@@ -1,4 +1,4 @@
-module grammars::expressions::testing::PrecedeFollow
+module grammars::toRegularGrammarTesters::testing::PrecedeFollow
 
 /* Test for checking performance under precede/follow restrictions in the grammar
  * 
@@ -14,7 +14,12 @@ module grammars::expressions::testing::PrecedeFollow
  	
 
 lexical Id 
-	= "a" !<< [a-z]+ !>> E
+	= [a-z] !<< B !>> [a-z]
 	//| E
  	//= [a-z]+
  	;
+ 
+syntax B
+	= E
+	| "42"
+	;

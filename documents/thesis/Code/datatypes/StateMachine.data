@@ -1,0 +1,9 @@
+alias State = str;
+alias Token = Symbol;
+alias DeltaFunction = rel[State from, Token token, State to];
+alias Transition = tuple[State from, Token token, State to];
+
+data StateMachine
+	= \sm-dfa(DeltaFunction delta, State q0, set[State] F)
+	| \sm-nfa(DeltaFunction delta, State q0, set[State] F)
+	;

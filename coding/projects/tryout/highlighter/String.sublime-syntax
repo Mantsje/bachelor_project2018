@@ -1,0 +1,77 @@
+%YAML 1.2
+---
+
+name: String
+file_extensions: [str]
+scope: source.str
+
+contexts:
+  Interp_0:
+    - meta_scope: Interp_0
+    - match: '(([\x{1}-\x{3D}\x{3F}-\x{10FFFF}])+)'
+      pop: true
+
+
+  StringBody_0:
+    - meta_scope: StringBody_0
+    - match: '(((\\\")|(\\\<)|(\\\>)|([\x{1}-\x{21}\x{23}-\x{3B}\x{3D}\x{3F}-\x{10FFFF}]))+)'
+      scope: string.quoted.double
+      set: [StringBody_1]
+
+
+  StringBody_1:
+    - meta_scope: StringBody_1
+    - match: '(?!((\<)))'
+      pop: true
+    - match: '(\<)'
+      set: [StringBody_2]
+
+
+  StringBody_2:
+    - meta_scope: StringBody_2
+    - match: '(?=(([\x{1}-\x{3D}\x{3F}-\x{10FFFF}])+))'
+      set: [StringBody_3, Interp_0]
+
+
+  StringBody_3:
+    - meta_scope: StringBody_3
+    - match: '(\>)'
+      set: [StringBody_4]
+
+
+  StringBody_4:
+    - meta_scope: StringBody_4
+    - match: '(((\\\")|(\\\<)|(\\\>)|([\x{1}-\x{21}\x{23}-\x{3B}\x{3D}\x{3F}-\x{10FFFF}]))+)'
+      scope: string.quoted.double
+      set: [StringBody_1]
+
+
+  StringLiteral_0:
+    - meta_scope: StringLiteral_0
+    - match: '(\")'
+      scope: string.quoted.double
+      set: [StringLiteral_1]
+
+
+  StringLiteral_1:
+    - meta_scope: StringLiteral_1
+    - match: '(?=(((\\\")|(\\\<)|(\\\>)|([\x{1}-\x{21}\x{23}-\x{3B}\x{3D}\x{3F}-\x{10FFFF}]))+))'
+      set: [StringLiteral_2, StringBody_0]
+
+
+  StringLiteral_2:
+    - meta_scope: StringLiteral_2
+    - match: '(\")'
+      scope: string.quoted.double
+      pop: true
+
+
+  String_0:
+    - meta_scope: String_0
+    - match: '(?=(\"))'
+      set: [StringLiteral_0]
+
+
+  main:
+    - meta_scope: main
+    - include: String_0

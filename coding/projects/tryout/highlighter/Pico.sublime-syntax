@@ -1,0 +1,568 @@
+%YAML 1.2
+---
+
+name: Pico
+file_extensions: [pico]
+scope: source.pico
+
+contexts:
+  Declarations_0:
+    - meta_scope: Declarations_0
+    - match: '(declare)'
+      scope: keyword.declaration
+      set: [Declarations_1]
+
+
+  Declarations_1:
+    - meta_scope: Declarations_1
+    - match: '(?=(([\x{61}-\x{7A}])(([\x{30}-\x{39}\x{61}-\x{7A}])*)(?!([\x{30}-\x{39}\x{61}-\x{7A}]))))'
+      set: [Declarations_2, IdType__DQUOTECOMMADQUOTE__STARSEPS_0]
+
+
+  Declarations_2:
+    - meta_scope: Declarations_2
+    - match: '(\;)'
+      scope: null
+      pop: true
+
+
+  Expression_0:
+    - meta_scope: Expression_0
+    - match: '(?=(([\x{61}-\x{7A}])(([\x{30}-\x{39}\x{61}-\x{7A}])*)(?!([\x{30}-\x{39}\x{61}-\x{7A}]))))'
+      set: [Expression_3, Id_0]
+    - match: '(?=(([\x{30}-\x{39}])+))'
+      set: [Expression_4, Natural_0]
+    - match: '(?=(\"))'
+      set: [Expression_1, String_0]
+    - match: '(\()'
+      set: [Expression_2]
+
+
+  Expression_1:
+    - meta_scope: Expression_1
+    - match: '(\|\|)'
+      set: [Expression_8]
+    - match: '(?!((\|\|)|(\-)|(\+)|(\))))'
+      pop: true
+    - match: '(\))'
+      set: [Expression_6]
+    - match: '(\+)'
+      set: [Expression_7]
+    - match: '(\-)'
+      set: [Expression_5]
+
+
+  Expression_2:
+    - meta_scope: Expression_2
+    - match: '(?=(([\x{61}-\x{7A}])(([\x{30}-\x{39}\x{61}-\x{7A}])*)(?!([\x{30}-\x{39}\x{61}-\x{7A}]))))'
+      set: [Expression_3, Id_0]
+    - match: '(?=(([\x{30}-\x{39}])+))'
+      set: [Expression_4, Natural_0]
+    - match: '(?=(\"))'
+      set: [Expression_1, String_0]
+    - match: '(\()'
+      set: [Expression_2]
+
+
+  Expression_3:
+    - meta_scope: Expression_3
+    - match: '(\|\|)'
+      set: [Expression_8]
+    - match: '(?!((\|\|)|(\-)|(\+)|(\))))'
+      pop: true
+    - match: '(\))'
+      set: [Expression_6]
+    - match: '(\+)'
+      set: [Expression_7]
+    - match: '(\-)'
+      set: [Expression_5]
+
+
+  Expression_4:
+    - meta_scope: Expression_4
+    - match: '(\|\|)'
+      set: [Expression_8]
+    - match: '(?!((\|\|)|(\-)|(\+)|(\))))'
+      pop: true
+    - match: '(\))'
+      set: [Expression_6]
+    - match: '(\+)'
+      set: [Expression_7]
+    - match: '(\-)'
+      set: [Expression_5]
+
+
+  Expression_5:
+    - meta_scope: Expression_5
+    - match: '(?=(([\x{61}-\x{7A}])(([\x{30}-\x{39}\x{61}-\x{7A}])*)(?!([\x{30}-\x{39}\x{61}-\x{7A}]))))'
+      set: [Expression_3, Id_0]
+    - match: '(?=(([\x{30}-\x{39}])+))'
+      set: [Expression_4, Natural_0]
+    - match: '(?=(\"))'
+      set: [Expression_1, String_0]
+    - match: '(\()'
+      set: [Expression_2]
+
+
+  Expression_6:
+    - meta_scope: Expression_6
+    - match: '(\|\|)'
+      set: [Expression_8]
+    - match: '(?!((\|\|)|(\-)|(\+)|(\))))'
+      pop: true
+    - match: '(\))'
+      set: [Expression_6]
+    - match: '(\+)'
+      set: [Expression_7]
+    - match: '(\-)'
+      set: [Expression_5]
+
+
+  Expression_7:
+    - meta_scope: Expression_7
+    - match: '(?=(([\x{61}-\x{7A}])(([\x{30}-\x{39}\x{61}-\x{7A}])*)(?!([\x{30}-\x{39}\x{61}-\x{7A}]))))'
+      set: [Expression_3, Id_0]
+    - match: '(?=(([\x{30}-\x{39}])+))'
+      set: [Expression_4, Natural_0]
+    - match: '(?=(\"))'
+      set: [Expression_1, String_0]
+    - match: '(\()'
+      set: [Expression_2]
+
+
+  Expression_8:
+    - meta_scope: Expression_8
+    - match: '(?=(([\x{61}-\x{7A}])(([\x{30}-\x{39}\x{61}-\x{7A}])*)(?!([\x{30}-\x{39}\x{61}-\x{7A}]))))'
+      set: [Expression_3, Id_0]
+    - match: '(?=(([\x{30}-\x{39}])+))'
+      set: [Expression_4, Natural_0]
+    - match: '(?=(\"))'
+      set: [Expression_1, String_0]
+    - match: '(\()'
+      set: [Expression_2]
+
+
+  IdType_0:
+    - meta_scope: IdType_0
+    - match: '(?=(([\x{61}-\x{7A}])(([\x{30}-\x{39}\x{61}-\x{7A}])*)(?!([\x{30}-\x{39}\x{61}-\x{7A}]))))'
+      set: [IdType_1, Id_0]
+
+
+  IdType_1:
+    - meta_scope: IdType_1
+    - match: '(:)'
+      set: [IdType_2]
+
+
+  IdType_2:
+    - meta_scope: IdType_2
+    - match: '(?=(natural|string|nil\-type))'
+      set: [Type_0]
+
+
+  IdType__DQUOTECOMMADQUOTE__STARSEPS_0:
+    - meta_scope: IdType__DQUOTECOMMADQUOTE__STARSEPS_0
+    - match: '(?!((?=(([\x{61}-\x{7A}])(([\x{30}-\x{39}\x{61}-\x{7A}])*)(?!([\x{30}-\x{39}\x{61}-\x{7A}]))))))'
+      pop: true
+    - match: '(?=(([\x{61}-\x{7A}])(([\x{30}-\x{39}\x{61}-\x{7A}])*)(?!([\x{30}-\x{39}\x{61}-\x{7A}]))))'
+      set: [IdType__DQUOTECOMMADQUOTE__STARSEPS_1, IdType_0]
+
+
+  IdType__DQUOTECOMMADQUOTE__STARSEPS_1:
+    - meta_scope: IdType__DQUOTECOMMADQUOTE__STARSEPS_1
+    - match: '(\,)'
+      set: [IdType__DQUOTECOMMADQUOTE__STARSEPS_2]
+    - match: '(?!((\,)))'
+      pop: true
+
+
+  IdType__DQUOTECOMMADQUOTE__STARSEPS_2:
+    - meta_scope: IdType__DQUOTECOMMADQUOTE__STARSEPS_2
+    - match: '(?!((?=(([\x{61}-\x{7A}])(([\x{30}-\x{39}\x{61}-\x{7A}])*)(?!([\x{30}-\x{39}\x{61}-\x{7A}]))))))'
+      pop: true
+    - match: '(?=(([\x{61}-\x{7A}])(([\x{30}-\x{39}\x{61}-\x{7A}])*)(?!([\x{30}-\x{39}\x{61}-\x{7A}]))))'
+      set: [IdType__DQUOTECOMMADQUOTE__STARSEPS_1, IdType_0]
+
+
+  Id_0:
+    - meta_scope: Id_0
+    - match: '(([\x{61}-\x{7A}])(([\x{30}-\x{39}\x{61}-\x{7A}])*))'
+      set: [Id_INNER_0_0]
+
+
+  Id_INNER_0_0:
+    - meta_include_prototype: false
+    - meta_scope: Id_INNER_0_0
+    - match: '((?!([\x{30}-\x{39}\x{61}-\x{7A}])))'
+      set: [Id_POSTCOND_0_1]
+
+
+  Id_POSTCOND_0_1:
+    - meta_include_prototype: false
+    - meta_scope: Id_POSTCOND_0_1
+    - match: ''
+      pop: true
+
+
+  Layout_0:
+    - meta_scope: Layout_0
+    - match: '(?=(%%|%|[\x{9}-\x{A}\x{D}\x{20}]))'
+      set: [Layout_INNER_0_0, WhitespaceAndComment_STAR_0]
+
+
+  Layout_INNER_0_0:
+    - meta_include_prototype: false
+    - meta_scope: Layout_INNER_0_0
+    - match: '((?!([\x{9}-\x{A}\x{D}\x{20}\x{25}])))'
+      set: [Layout_POSTCOND_0_1]
+
+
+  Layout_POSTCOND_0_1:
+    - meta_include_prototype: false
+    - meta_scope: Layout_POSTCOND_0_1
+    - match: ''
+      pop: true
+
+
+  Natural_0:
+    - meta_scope: Natural_0
+    - match: '(([\x{30}-\x{39}])+)'
+      scope: constant.numeric.integer
+      pop: true
+
+
+  Program_0:
+    - meta_scope: Program_0
+    - match: '(begin)'
+      scope: keyword.control.flow
+      set: [Program_1]
+
+
+  Program_1:
+    - meta_scope: Program_1
+    - match: '(?=(declare))'
+      set: [Program_2, Declarations_0]
+
+
+  Program_2:
+    - meta_scope: Program_2
+    - match: '(?=(fi|([\x{61}-\x{7A}])(([\x{30}-\x{39}\x{61}-\x{7A}])*)(?!([\x{30}-\x{39}\x{61}-\x{7A}]))|while|od|else|if))'
+      set: [Program_3, Statement__DQUOTESEMIDQUOTE__STARSEPS_0]
+
+
+  Program_3:
+    - meta_scope: Program_3
+    - match: '(end)'
+      scope: keyword.control.flow
+      pop: true
+
+
+  Statement__DQUOTESEMIDQUOTE__STARSEPS_0:
+    - meta_scope: Statement__DQUOTESEMIDQUOTE__STARSEPS_0
+    - match: '(?=(([\x{61}-\x{7A}])(([\x{30}-\x{39}\x{61}-\x{7A}])*)(?!([\x{30}-\x{39}\x{61}-\x{7A}]))))'
+      set: [Statement__DQUOTESEMIDQUOTE__STARSEPS_1, Id_0]
+    - match: '(fi)'
+      scope: keyword.control.flow
+      set: [Statement__DQUOTESEMIDQUOTE__STARSEPS_2]
+    - match: '(while)'
+      scope: keyword.control.flow
+      set: [Statement__DQUOTESEMIDQUOTE__STARSEPS_6]
+    - match: '(else)'
+      scope: keyword.control.flow
+      set: [Statement__DQUOTESEMIDQUOTE__STARSEPS_4]
+    - match: '(od)'
+      scope: keyword.control.flow
+      set: [Statement__DQUOTESEMIDQUOTE__STARSEPS_5]
+    - match: '(?!((while)|(if)|(else)|(od)|(?=(([\x{61}-\x{7A}])(([\x{30}-\x{39}\x{61}-\x{7A}])*)(?!([\x{30}-\x{39}\x{61}-\x{7A}]))))|(fi)))'
+      pop: true
+    - match: '(if)'
+      scope: keyword.control.flow
+      set: [Statement__DQUOTESEMIDQUOTE__STARSEPS_3]
+
+
+  Statement__DQUOTESEMIDQUOTE__STARSEPS_1:
+    - meta_scope: Statement__DQUOTESEMIDQUOTE__STARSEPS_1
+    - match: '(:\=)'
+      set: [Statement__DQUOTESEMIDQUOTE__STARSEPS_12]
+
+
+  Statement__DQUOTESEMIDQUOTE__STARSEPS_10:
+    - meta_scope: Statement__DQUOTESEMIDQUOTE__STARSEPS_10
+    - match: '(do)'
+      scope: keyword.control.flow
+      set: [Statement__DQUOTESEMIDQUOTE__STARSEPS_11]
+
+
+  Statement__DQUOTESEMIDQUOTE__STARSEPS_11:
+    - meta_scope: Statement__DQUOTESEMIDQUOTE__STARSEPS_11
+    - match: '(?=(([\x{61}-\x{7A}])(([\x{30}-\x{39}\x{61}-\x{7A}])*)(?!([\x{30}-\x{39}\x{61}-\x{7A}]))))'
+      set: [Statement__DQUOTESEMIDQUOTE__STARSEPS_1, Id_0]
+    - match: '(fi)'
+      scope: keyword.control.flow
+      set: [Statement__DQUOTESEMIDQUOTE__STARSEPS_2]
+    - match: '(while)'
+      scope: keyword.control.flow
+      set: [Statement__DQUOTESEMIDQUOTE__STARSEPS_6]
+    - match: '(else)'
+      scope: keyword.control.flow
+      set: [Statement__DQUOTESEMIDQUOTE__STARSEPS_4]
+    - match: '(od)'
+      scope: keyword.control.flow
+      set: [Statement__DQUOTESEMIDQUOTE__STARSEPS_5]
+    - match: '(?!((while)|(if)|(else)|(od)|(?=(([\x{61}-\x{7A}])(([\x{30}-\x{39}\x{61}-\x{7A}])*)(?!([\x{30}-\x{39}\x{61}-\x{7A}]))))|(fi)))'
+      pop: true
+    - match: '(if)'
+      scope: keyword.control.flow
+      set: [Statement__DQUOTESEMIDQUOTE__STARSEPS_3]
+
+
+  Statement__DQUOTESEMIDQUOTE__STARSEPS_12:
+    - meta_scope: Statement__DQUOTESEMIDQUOTE__STARSEPS_12
+    - match: '(?=(\"|\(|([\x{30}-\x{39}])+|([\x{61}-\x{7A}])(([\x{30}-\x{39}\x{61}-\x{7A}])*)(?!([\x{30}-\x{39}\x{61}-\x{7A}]))))'
+      set: [Statement__DQUOTESEMIDQUOTE__STARSEPS_13, Expression_0]
+
+
+  Statement__DQUOTESEMIDQUOTE__STARSEPS_13:
+    - meta_scope: Statement__DQUOTESEMIDQUOTE__STARSEPS_13
+    - match: '(\;)'
+      scope: null
+      set: [Statement__DQUOTESEMIDQUOTE__STARSEPS_7]
+    - match: '(fi)'
+      scope: keyword.control.flow
+      set: [Statement__DQUOTESEMIDQUOTE__STARSEPS_2]
+    - match: '(else)'
+      scope: keyword.control.flow
+      set: [Statement__DQUOTESEMIDQUOTE__STARSEPS_4]
+    - match: '(od)'
+      scope: keyword.control.flow
+      set: [Statement__DQUOTESEMIDQUOTE__STARSEPS_5]
+
+
+  Statement__DQUOTESEMIDQUOTE__STARSEPS_2:
+    - meta_scope: Statement__DQUOTESEMIDQUOTE__STARSEPS_2
+    - match: '(\;)'
+      scope: null
+      set: [Statement__DQUOTESEMIDQUOTE__STARSEPS_7]
+    - match: '(fi)'
+      scope: keyword.control.flow
+      set: [Statement__DQUOTESEMIDQUOTE__STARSEPS_2]
+    - match: '(else)'
+      scope: keyword.control.flow
+      set: [Statement__DQUOTESEMIDQUOTE__STARSEPS_4]
+    - match: '(od)'
+      scope: keyword.control.flow
+      set: [Statement__DQUOTESEMIDQUOTE__STARSEPS_5]
+
+
+  Statement__DQUOTESEMIDQUOTE__STARSEPS_3:
+    - meta_scope: Statement__DQUOTESEMIDQUOTE__STARSEPS_3
+    - match: '(?=(\"|\(|([\x{30}-\x{39}])+|([\x{61}-\x{7A}])(([\x{30}-\x{39}\x{61}-\x{7A}])*)(?!([\x{30}-\x{39}\x{61}-\x{7A}]))))'
+      set: [Statement__DQUOTESEMIDQUOTE__STARSEPS_8, Expression_0]
+
+
+  Statement__DQUOTESEMIDQUOTE__STARSEPS_4:
+    - meta_scope: Statement__DQUOTESEMIDQUOTE__STARSEPS_4
+    - match: '(?=(([\x{61}-\x{7A}])(([\x{30}-\x{39}\x{61}-\x{7A}])*)(?!([\x{30}-\x{39}\x{61}-\x{7A}]))))'
+      set: [Statement__DQUOTESEMIDQUOTE__STARSEPS_1, Id_0]
+    - match: '(fi)'
+      scope: keyword.control.flow
+      set: [Statement__DQUOTESEMIDQUOTE__STARSEPS_2]
+    - match: '(while)'
+      scope: keyword.control.flow
+      set: [Statement__DQUOTESEMIDQUOTE__STARSEPS_6]
+    - match: '(else)'
+      scope: keyword.control.flow
+      set: [Statement__DQUOTESEMIDQUOTE__STARSEPS_4]
+    - match: '(od)'
+      scope: keyword.control.flow
+      set: [Statement__DQUOTESEMIDQUOTE__STARSEPS_5]
+    - match: '(?!((while)|(if)|(else)|(od)|(?=(([\x{61}-\x{7A}])(([\x{30}-\x{39}\x{61}-\x{7A}])*)(?!([\x{30}-\x{39}\x{61}-\x{7A}]))))|(fi)))'
+      pop: true
+    - match: '(if)'
+      scope: keyword.control.flow
+      set: [Statement__DQUOTESEMIDQUOTE__STARSEPS_3]
+
+
+  Statement__DQUOTESEMIDQUOTE__STARSEPS_5:
+    - meta_scope: Statement__DQUOTESEMIDQUOTE__STARSEPS_5
+    - match: '(\;)'
+      scope: null
+      set: [Statement__DQUOTESEMIDQUOTE__STARSEPS_7]
+    - match: '(fi)'
+      scope: keyword.control.flow
+      set: [Statement__DQUOTESEMIDQUOTE__STARSEPS_2]
+    - match: '(else)'
+      scope: keyword.control.flow
+      set: [Statement__DQUOTESEMIDQUOTE__STARSEPS_4]
+    - match: '(od)'
+      scope: keyword.control.flow
+      set: [Statement__DQUOTESEMIDQUOTE__STARSEPS_5]
+
+
+  Statement__DQUOTESEMIDQUOTE__STARSEPS_6:
+    - meta_scope: Statement__DQUOTESEMIDQUOTE__STARSEPS_6
+    - match: '(?=(\"|\(|([\x{30}-\x{39}])+|([\x{61}-\x{7A}])(([\x{30}-\x{39}\x{61}-\x{7A}])*)(?!([\x{30}-\x{39}\x{61}-\x{7A}]))))'
+      set: [Statement__DQUOTESEMIDQUOTE__STARSEPS_10, Expression_0]
+
+
+  Statement__DQUOTESEMIDQUOTE__STARSEPS_7:
+    - meta_scope: Statement__DQUOTESEMIDQUOTE__STARSEPS_7
+    - match: '(?=(([\x{61}-\x{7A}])(([\x{30}-\x{39}\x{61}-\x{7A}])*)(?!([\x{30}-\x{39}\x{61}-\x{7A}]))))'
+      set: [Statement__DQUOTESEMIDQUOTE__STARSEPS_1, Id_0]
+    - match: '(fi)'
+      scope: keyword.control.flow
+      set: [Statement__DQUOTESEMIDQUOTE__STARSEPS_2]
+    - match: '(while)'
+      scope: keyword.control.flow
+      set: [Statement__DQUOTESEMIDQUOTE__STARSEPS_6]
+    - match: '(else)'
+      scope: keyword.control.flow
+      set: [Statement__DQUOTESEMIDQUOTE__STARSEPS_4]
+    - match: '(od)'
+      scope: keyword.control.flow
+      set: [Statement__DQUOTESEMIDQUOTE__STARSEPS_5]
+    - match: '(?!((while)|(if)|(else)|(od)|(?=(([\x{61}-\x{7A}])(([\x{30}-\x{39}\x{61}-\x{7A}])*)(?!([\x{30}-\x{39}\x{61}-\x{7A}]))))|(fi)))'
+      pop: true
+    - match: '(if)'
+      scope: keyword.control.flow
+      set: [Statement__DQUOTESEMIDQUOTE__STARSEPS_3]
+
+
+  Statement__DQUOTESEMIDQUOTE__STARSEPS_8:
+    - meta_scope: Statement__DQUOTESEMIDQUOTE__STARSEPS_8
+    - match: '(then)'
+      scope: keyword.control.flow
+      set: [Statement__DQUOTESEMIDQUOTE__STARSEPS_9]
+
+
+  Statement__DQUOTESEMIDQUOTE__STARSEPS_9:
+    - meta_scope: Statement__DQUOTESEMIDQUOTE__STARSEPS_9
+    - match: '(?=(([\x{61}-\x{7A}])(([\x{30}-\x{39}\x{61}-\x{7A}])*)(?!([\x{30}-\x{39}\x{61}-\x{7A}]))))'
+      set: [Statement__DQUOTESEMIDQUOTE__STARSEPS_1, Id_0]
+    - match: '(fi)'
+      scope: keyword.control.flow
+      set: [Statement__DQUOTESEMIDQUOTE__STARSEPS_2]
+    - match: '(while)'
+      scope: keyword.control.flow
+      set: [Statement__DQUOTESEMIDQUOTE__STARSEPS_6]
+    - match: '(else)'
+      scope: keyword.control.flow
+      set: [Statement__DQUOTESEMIDQUOTE__STARSEPS_4]
+    - match: '(od)'
+      scope: keyword.control.flow
+      set: [Statement__DQUOTESEMIDQUOTE__STARSEPS_5]
+    - match: '(?!((while)|(if)|(else)|(od)|(?=(([\x{61}-\x{7A}])(([\x{30}-\x{39}\x{61}-\x{7A}])*)(?!([\x{30}-\x{39}\x{61}-\x{7A}]))))|(fi)))'
+      pop: true
+    - match: '(if)'
+      scope: keyword.control.flow
+      set: [Statement__DQUOTESEMIDQUOTE__STARSEPS_3]
+
+
+  String_0:
+    - meta_scope: String_0
+    - match: '(\")'
+      scope: string.quoted.double
+      set: [String_1]
+
+
+  String_1:
+    - meta_scope: String_1
+    - match: '(([\x{1}-\x{21}\x{23}-\x{10FFFF}])*)'
+      scope: string.quoted.double
+      set: [String_2]
+
+
+  String_2:
+    - meta_scope: String_2
+    - match: '(\")'
+      scope: string.quoted.double
+      pop: true
+
+
+  Type_0:
+    - meta_scope: Type_0
+    - match: '(natural)'
+      scope: storage.type
+      pop: true
+    - match: '(nil\-type)'
+      scope: storage.type
+      pop: true
+    - match: '(string)'
+      scope: storage.type
+      pop: true
+
+
+  WhitespaceAndComment_0:
+    - meta_scope: WhitespaceAndComment_0
+    - match: '(%)'
+      scope: comment.block
+      set: [WhitespaceAndComment_1]
+    - match: '([\x{9}-\x{A}\x{D}\x{20}])'
+      pop: true
+    - match: '(%%)'
+      scope: comment.line
+      set: [WhitespaceAndComment_2]
+
+
+  WhitespaceAndComment_1:
+    - meta_scope: WhitespaceAndComment_1
+    - match: '(([\x{1}-\x{24}\x{26}-\x{10FFFF}])+)'
+      scope: comment.block
+      set: [WhitespaceAndComment_5]
+
+
+  WhitespaceAndComment_2:
+    - meta_scope: WhitespaceAndComment_2
+    - match: '(([\x{1}-\x{9}\x{B}-\x{10FFFF}])*)'
+      scope: comment.line
+      set: [WhitespaceAndComment_INNER_0_0]
+
+
+  WhitespaceAndComment_5:
+    - meta_scope: WhitespaceAndComment_5
+    - match: '(%)'
+      scope: comment.block
+      pop: true
+
+
+  WhitespaceAndComment_INNER_0_0:
+    - meta_include_prototype: false
+    - meta_scope: WhitespaceAndComment_INNER_0_0
+    - match: '($)'
+      set: [WhitespaceAndComment_POSTCOND_0_1]
+
+
+  WhitespaceAndComment_POSTCOND_0_1:
+    - meta_include_prototype: false
+    - meta_scope: WhitespaceAndComment_POSTCOND_0_1
+    - match: ''
+      pop: true
+
+
+  WhitespaceAndComment_STAR_0:
+    - meta_scope: WhitespaceAndComment_STAR_0
+    - match: '(?=(%%|%|[\x{9}-\x{A}\x{D}\x{20}]))'
+      set: [WhitespaceAndComment_STAR_1, WhitespaceAndComment_0]
+    - match: '(?!((?=(%%|%|[\x{9}-\x{A}\x{D}\x{20}]))))'
+      pop: true
+
+
+  WhitespaceAndComment_STAR_1:
+    - meta_scope: WhitespaceAndComment_STAR_1
+    - match: '(?=(%%|%|[\x{9}-\x{A}\x{D}\x{20}]))'
+      set: [WhitespaceAndComment_STAR_1, WhitespaceAndComment_0]
+    - match: '(?!((?=(%%|%|[\x{9}-\x{A}\x{D}\x{20}]))))'
+      pop: true
+
+
+  main:
+    - meta_scope: main
+    - include: Program_0
+
+
+  prototype:
+    - meta_scope: prototype
+    - match: '(?=((?=(%%|%|[\x{9}-\x{A}\x{D}\x{20}]))))'
+      push: [Layout_0]
+
+

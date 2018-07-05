@@ -1,19 +1,15 @@
 module grammars::A
 
-start syntax A
-	= "a" B
+start syntax S = A;
+
+lexical A = (B | D)+;
+
+lexical B 
+	= @Context="keyword.control.flow" "b"
+	| @Context="null keyword.control.flow" D "b"
 	;
 
-syntax B 
-	= ("b"|"d")
-	| A
+lexical D 
+	= @Context="storage.type" "d"
+	| @Context="storage.type null" "d" B
 	;
-
-//syntax B 
-//	= {C ","}+
-//	;
-//
-//lexical C 
-//	= A
-//	| "int"
-//	;

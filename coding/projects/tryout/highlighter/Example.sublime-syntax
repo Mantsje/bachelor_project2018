@@ -1,0 +1,106 @@
+%YAML 1.2
+---
+
+name: Example
+file_extensions: [ex]
+scope: source.ex
+
+contexts:
+  A_0:
+    - meta_scope: A_0
+    - match: '(?=(b|d))'
+      set: [B_D_ALT_PLUS_0]
+
+
+  B_D_ALT_0:
+    - meta_scope: B_D_ALT_0
+    - match: '(d)'
+      scope: storage.type
+      set: [B_D_ALT_1]
+    - match: '(b)'
+      scope: keyword.control.flow
+      set: [B_D_ALT_2]
+
+
+  B_D_ALT_1:
+    - meta_scope: B_D_ALT_1
+    - match: '(d)'
+      scope: storage.type
+      set: [B_D_ALT_1]
+    - match: '(?!((d)|(b)))'
+      pop: true
+    - match: '(b)'
+      scope: keyword.control.flow
+      set: [B_D_ALT_5]
+
+
+  B_D_ALT_2:
+    - meta_scope: B_D_ALT_2
+    - match: '(?!((b)))'
+      pop: true
+    - match: '(b)'
+      scope: keyword.control.flow
+      set: [B_D_ALT_3]
+
+
+  B_D_ALT_3:
+    - meta_scope: B_D_ALT_3
+    - match: '(?!((b)))'
+      pop: true
+    - match: '(b)'
+      scope: keyword.control.flow
+      set: [B_D_ALT_4]
+
+
+  B_D_ALT_4:
+    - meta_scope: B_D_ALT_4
+    - match: '(?!((b)))'
+      pop: true
+    - match: '(b)'
+      scope: keyword.control.flow
+      set: [B_D_ALT_4]
+
+
+  B_D_ALT_5:
+    - meta_scope: B_D_ALT_5
+    - match: '(?!((b)))'
+      pop: true
+    - match: '(b)'
+      scope: keyword.control.flow
+      set: [B_D_ALT_6]
+
+
+  B_D_ALT_6:
+    - meta_scope: B_D_ALT_6
+    - match: '(?!((b)))'
+      pop: true
+    - match: '(b)'
+      scope: keyword.control.flow
+      set: [B_D_ALT_6]
+
+
+  B_D_ALT_PLUS_0:
+    - meta_scope: B_D_ALT_PLUS_0
+    - match: '(?=(b|d))'
+      set: [B_D_ALT_PLUS_1, B_D_ALT_0]
+
+
+  B_D_ALT_PLUS_1:
+    - meta_scope: B_D_ALT_PLUS_1
+    - match: '(?=(b|d))'
+      set: [B_D_ALT_PLUS_1, B_D_ALT_0]
+    - match: '(?!((?=(b|d))))'
+      pop: true
+
+
+  S_0:
+    - meta_scope: S_0
+    - match: '(?=(b|d))'
+      set: [A_0]
+
+
+  main:
+    - meta_scope: main
+    - include: S_0
+
+

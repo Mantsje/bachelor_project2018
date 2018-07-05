@@ -1,0 +1,53 @@
+\begin{algorithm}
+	\caption{Resolve Conflicts}	\label{alg:conflicts}
+	\begin{algorithmic}[1]
+		\Function{solveConflicts}{dfa, allDfas, nonTerminals, conflicts}
+		\ForAll {$\{tr | tr \in conflicts\}$}
+			\State $nfa \gets replaceTransitionWithMachine(tr, dfa)$
+		\EndFor
+		\State $dfa \gets NFA2DFA(nfa)$
+		\State $newConflicts \gets findConflicts(dfa, nonTerminals, allDfas)$
+		\If {$newConflicts \not = \{\}$}
+			\State \Return $solveConfcicts(dfa, allDfas, nonTerminals, newConflicts)$
+		\Else	
+			\State \Return $dfa$
+		\EndIf
+		\EndFunction
+	\end{algorithmic}
+\end{algorithm}
+\vfill
+\begin{algorithm}
+	\caption{Find Conflicts}
+	\begin{algorithmic}[1]		
+		\Function{findConflicts}{dfa, nonTerminals, allDfas}
+			\State $conflicts \gets \{\}$
+			\ForAll {$\{state | state \in dfa.Q\}$}
+				\State $tokens \gets alphabetOfState(state, dfa)$
+				\State $ntsOfState \gets \{nt | nt \in tokens \land nt \in nonTerminals\}$
+				\State $terminalsOfState \gets tokens - ntsOfState$
+				\ForAll {$\{nt | nt \in ntsOfState\}$}
+					\State $nextTerminals \gets firstTerminalOf(allDfas[nt], nonTerminals, allDfas)$
+					\If {$(nextTerminals - terminalsOfState \not = \{\})$}
+						\State $conflicts \gets conflicts + (state, nt, dfa.\delta(state, nt))$ 
+					\EndIf
+				\EndFor
+			\EndFor
+		\State \Return $conflicts$
+		\EndFunction		
+	\end{algorithmic}
+\end{algorithm}
+\vfill
+\begin{algorithm}
+	\caption{Get the terminals reachable from the first state of a machine}
+	\begin{algorithmic}[1]		
+		\Function{firstTerminalOf}{dfa, nonTerminals, allDfas}
+			\State $tokens \gets alphabetOfState(dfa.q_0, dfa)$
+			\State $terms \gets tokens - nonTerminals$
+			\State $result \gets terms$
+			\ForAll{$\{nt | nt \in (tokens - terms)\} $}
+				\State $result \gets result + firstTerminalOf(allDfas[nt], nonTerminals, allDfas)$
+			\EndFor		
+			\State \Return $result$
+		\EndFunction
+	\end{algorithmic}
+\end{algorithm}

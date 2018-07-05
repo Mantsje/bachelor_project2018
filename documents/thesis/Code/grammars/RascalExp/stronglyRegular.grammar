@@ -1,0 +1,22 @@
+syntax Expression_end 
+  = "+" Expression 
+  | ")" Expression_end 
+  | Expression_end 
+  | "*" Expression 
+  | "-" Expression 
+  |
+  ;
+
+keyword MyKeywords = "else" | "if" | "fi" | "then";
+
+layout MyLayout = [\t-\n \a0C-\a0D \ ]*;
+
+lexical Identifier = [a-z] !<< [a-z]+ !>> [a-z] \ MyKeywords;
+
+syntax Expression 
+  = Expression 
+  | "null" Expression_end 
+  | Identifier Expression_end 
+  | Expression 
+  | bracket "(" Expression 
+  ;

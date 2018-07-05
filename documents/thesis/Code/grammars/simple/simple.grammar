@@ -1,0 +1,13 @@
+start syntax S
+	= A B 
+	;
+
+lexical A
+	= "a" "a"
+	;
+
+lexical B
+	= "b" "b"
+	;
+
+layout Layout = [\ ]*;

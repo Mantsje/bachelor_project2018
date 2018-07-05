@@ -1,0 +1,141 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\defcounter {refsection}{0}\relax 
+\select@language {english}
+\contentsline {chapter}{Abstract}{iii}{section*.1}
+\contentsline {chapter}{\numberline {1}Project Description}{1}{chapter.4}
+\contentsline {section}{\numberline {1.1}Introduction}{1}{section.5}
+\contentsline {section}{\numberline {1.2}Problem Definition}{2}{section.6}
+\contentsline {subsection}{\numberline {1.2.1}Steps}{2}{subsection.7}
+\contentsline {subsection}{\numberline {1.2.2}Performance}{2}{subsection.8}
+\contentsline {chapter}{\numberline {2}Background Information}{3}{chapter.9}
+\contentsline {section}{\numberline {2.1}Graph}{3}{section.10}
+\contentsline {subsection}{\numberline {2.1.1}Definition}{3}{subsection.11}
+\contentsline {subsection}{\numberline {2.1.2}Strongly Connected Components}{3}{subsection.15}
+\contentsline {subsubsection}{Kosaraju's algorithm}{4}{section*.18}
+\contentsline {section}{\numberline {2.2}Context-Free Grammar}{5}{section.24}
+\contentsline {subsection}{\numberline {2.2.1}Definition}{5}{subsection.25}
+\contentsline {subsection}{\numberline {2.2.2}Graph of a CFG}{5}{subsection.28}
+\contentsline {subsection}{\numberline {2.2.3}Strongly Regular Grammars}{5}{subsection.30}
+\contentsline {section}{\numberline {2.3}State Machines}{7}{section.37}
+\contentsline {subsection}{\numberline {2.3.1}Definition}{7}{subsection.38}
+\contentsline {subsection}{\numberline {2.3.2}Machines for Strongly Regular Grammars}{7}{subsection.43}
+\contentsline {section}{\numberline {2.4}State-Based Syntax Highlighters}{8}{section.48}
+\contentsline {subsection}{\numberline {2.4.1}Definition}{8}{subsection.49}
+\contentsline {subsection}{\numberline {2.4.2}The TextMate JSON-like Syntax Definition}{9}{subsection.50}
+\contentsline {subsubsection}{A TextMate highlighter}{9}{section*.52}
+\contentsline {subsection}{\numberline {2.4.3}The Sublime YAML-like Syntax Definition}{10}{subsection.71}
+\contentsline {subsubsection}{Line endings}{10}{section*.73}
+\contentsline {subsubsection}{A Sublime highlighter}{11}{section*.85}
+\contentsline {chapter}{\numberline {3}The Algorithm}{13}{chapter.116}
+\contentsline {section}{\numberline {3.1}Approach}{13}{section.117}
+\contentsline {section}{\numberline {3.2}The Algorithm's Pipeline}{13}{section.121}
+\contentsline {subsection}{\numberline {3.2.1}Example grammar}{14}{subsection.126}
+\contentsline {subsection}{\numberline {3.2.2}Simplifying the grammar}{14}{subsection.142}
+\contentsline {subsection}{\numberline {3.2.3}Grammar to Graph}{15}{subsection.143}
+\contentsline {subsubsection}{Example}{15}{section*.144}
+\contentsline {subsection}{\numberline {3.2.4}$CFG$ to Strongly Regular Grammar}{15}{subsection.146}
+\contentsline {subsubsection}{Example}{15}{section*.147}
+\contentsline {subsection}{\numberline {3.2.5}Strongly Regular Grammar to Automaton}{16}{subsection.165}
+\contentsline {subsubsection}{Example}{16}{section*.166}
+\contentsline {subsubsection}{Conflict identification and resolution}{18}{section*.169}
+\contentsline {subsubsection}{Example}{19}{section*.171}
+\contentsline {subsection}{\numberline {3.2.6}Mapping machines to contexts}{21}{subsection.176}
+\contentsline {subsubsection}{Final State Cases}{22}{section*.184}
+\contentsline {subsubsection}{Example}{23}{section*.185}
+\contentsline {chapter}{\numberline {4}Rascal Implementation}{25}{chapter.266}
+\contentsline {section}{\numberline {4.1}Motivation for Rascal}{25}{section.267}
+\contentsline {section}{\numberline {4.2}Grammar formalism}{26}{section.269}
+\contentsline {subsection}{\numberline {4.2.1}Simple grammar definition}{26}{subsection.271}
+\contentsline {subsection}{\numberline {4.2.2}More advanced constructs}{27}{subsection.286}
+\contentsline {subsubsection}{Regular tokens}{27}{section*.287}
+\contentsline {subsubsection}{Labels}{27}{section*.300}
+\contentsline {subsubsection}{Tags}{28}{section*.306}
+\contentsline {subsubsection}{Disambiguation}{28}{section*.316}
+\contentsline {subsubsection}{An advanced example grammar}{29}{section*.330}
+\contentsline {subsection}{\numberline {4.2.3}Internal representation}{30}{subsection.331}
+\contentsline {subsubsection}{Symbols}{30}{section*.332}
+\contentsline {subsubsection}{Productions}{31}{section*.359}
+\contentsline {section}{\numberline {4.3}Implementing the Algorithm in Rascal}{32}{section.371}
+\contentsline {subsection}{\numberline {4.3.1}ToPlainGrammar}{32}{subsection.372}
+\contentsline {subsubsection}{Layouts}{33}{section*.383}
+\contentsline {subsubsection}{Scope information extraction}{33}{section*.385}
+\contentsline {subsubsection}{The implementation}{34}{section*.386}
+\contentsline {subsection}{\numberline {4.3.2}Grammar2Graph}{34}{subsection.395}
+\contentsline {subsubsection}{Kosaraju}{35}{section*.412}
+\contentsline {subsection}{\numberline {4.3.3}ToStronglyRegularGrammar}{36}{subsection.432}
+\contentsline {subsection}{\numberline {4.3.4}Converting the grammar to StateMachines}{36}{subsection.433}
+\contentsline {subsubsection}{StateMachine datatype}{37}{section*.434}
+\contentsline {subsubsection}{Conflict resolution}{37}{section*.446}
+\contentsline {subsection}{\numberline {4.3.5}Mapping to Contexts}{37}{subsection.447}
+\contentsline {subsubsection}{Highlighter datatype}{38}{section*.448}
+\contentsline {chapter}{\numberline {5}Results \& Evaluation}{39}{chapter.485}
+\contentsline {section}{\numberline {5.1}Embedding scope information}{39}{section.486}
+\contentsline {section}{\numberline {5.2}Simplifying the grammar}{40}{section.509}
+\contentsline {subsection}{\numberline {5.2.1}Scope information}{41}{subsection.543}
+\contentsline {section}{\numberline {5.3}ToStronglyRegularGrammar}{42}{section.544}
+\contentsline {subsection}{\numberline {5.3.1}Grammar2Graph}{42}{subsection.545}
+\contentsline {subsection}{\numberline {5.3.2}Kosaraju}{42}{subsection.546}
+\contentsline {subsection}{\numberline {5.3.3}Mohri and Nederhof's transformation}{43}{subsection.563}
+\contentsline {section}{\numberline {5.4}The \emph {Strongly Regular Grammar} to StateMachines}{44}{section.587}
+\contentsline {section}{\numberline {5.5}The conflict resolution}{45}{section.599}
+\contentsline {section}{\numberline {5.6}ToContexts}{46}{section.627}
+\contentsline {section}{\numberline {5.7}Resulting highlighters}{47}{section.628}
+\contentsline {subsection}{\numberline {5.7.1}Final results}{47}{subsection.629}
+\contentsline {subsection}{\numberline {5.7.2}Pico breakdown}{48}{subsection.632}
+\contentsline {subsubsection}{Statistics on the final results}{50}{section*.668}
+\contentsline {section}{\numberline {5.8}Overall results}{50}{section.670}
+\contentsline {chapter}{\numberline {6}Discussion}{53}{chapter.681}
+\contentsline {section}{\numberline {6.1}Strong points}{53}{section.682}
+\contentsline {subsection}{\numberline {6.1.1}Algorithm}{53}{subsection.683}
+\contentsline {subsection}{\numberline {6.1.2}Implementation}{53}{subsection.684}
+\contentsline {section}{\numberline {6.2}Weak points}{54}{section.685}
+\contentsline {subsection}{\numberline {6.2.1}Algorithm}{54}{subsection.686}
+\contentsline {subsection}{\numberline {6.2.2}Implementation}{54}{subsection.687}
+\contentsline {section}{\numberline {6.3}Overall}{55}{section.688}
+\contentsline {chapter}{\numberline {7}Conclusion}{57}{chapter.689}
+\contentsline {section}{\numberline {7.1}Answers to subquestions}{57}{section.690}
+\contentsline {section}{\numberline {7.2}How can we derive state-based highlighters from context-free grammars?}{58}{section.691}
+\contentsline {chapter}{\numberline {8}Future \& Related Work}{59}{chapter.692}
+\contentsline {section}{\numberline {8.1}Related Work}{59}{section.693}
+\contentsline {subsection}{\numberline {8.1.1}Regular approximations}{59}{subsection.694}
+\contentsline {subsection}{\numberline {8.1.2}State-based highlighters}{59}{subsection.695}
+\contentsline {section}{\numberline {8.2}Future Work}{60}{section.696}
+\contentsline {chapter}{\numberline {A}Grammars}{61}{appendix.701}
+\contentsline {section}{\numberline {A.1}Grammar specifications}{61}{section.702}
+\contentsline {subsection}{\numberline {A.1.1}Simple example grammar}{61}{subsection.703}
+\contentsline {subsection}{\numberline {A.1.2}Mohri and Nederhof's example}{62}{subsection.718}
+\contentsline {chapter}{\numberline {B}Datatypes}{63}{appendix.766}
+\contentsline {chapter}{\numberline {C}Advanced Example Grammar}{65}{appendix.862}
+\contentsline {subsection}{\numberline {C.0.3}Original definition}{65}{subsection.863}
+\contentsline {subsection}{\numberline {C.0.4}With context information}{65}{subsection.887}
+\contentsline {subsection}{\numberline {C.0.5}Simplified without priority}{66}{subsection.910}
+\contentsline {subsection}{\numberline {C.0.6}Simplified with priority}{66}{subsection.932}
+\contentsline {subsection}{\numberline {C.0.7}Strongly Regular}{67}{subsection.962}
+\contentsline {subsection}{\numberline {C.0.8}NFA for strongly regular Expression}{68}{subsection.986}
+\contentsline {subsection}{\numberline {C.0.9}DFA for strongly regular Expression}{69}{subsection.988}
+\contentsline {chapter}{\numberline {D}Nested Comments Grammar}{71}{appendix.990}
+\contentsline {section}{\numberline {D.1}Original definition}{71}{section.991}
+\contentsline {section}{\numberline {D.2}Simplified without priority}{71}{section.1002}
+\contentsline {section}{\numberline {D.3}Strongly Regular}{71}{section.1027}
+\contentsline {subsection}{\numberline {D.3.1}NFA for strongly regular Comment}{73}{subsection.1064}
+\contentsline {subsection}{\numberline {D.3.2}DFA for strongly regular Comment}{73}{subsection.1066}
+\contentsline {subsection}{\numberline {D.3.3}Results of generated highlighter}{74}{subsection.1068}
+\contentsline {subsection}{\numberline {D.3.4}Results of hand-written highlighter}{74}{subsection.1070}
+\contentsline {chapter}{\numberline {E}String Interpolation Grammar}{75}{appendix.1072}
+\contentsline {section}{\numberline {E.1}Original definition}{75}{section.1073}
+\contentsline {subsection}{\numberline {E.1.1}Simplified without priority}{75}{subsection.1089}
+\contentsline {subsection}{\numberline {E.1.2}Strongly Regular}{76}{subsection.1105}
+\contentsline {subsection}{\numberline {E.1.3}NFA for strongly regular StringLiteral}{76}{subsection.1125}
+\contentsline {subsection}{\numberline {E.1.4}DFA for strongly regular StringLiteral}{76}{subsection.1127}
+\contentsline {subsection}{\numberline {E.1.5}Results of generated highlighter}{77}{subsection.1129}
+\contentsline {subsection}{\numberline {E.1.6}Results of hand-written highlighter}{77}{subsection.1131}
+\contentsline {chapter}{\numberline {F}Pico Grammar}{79}{appendix.1133}
+\contentsline {section}{\numberline {F.1}Original definition}{79}{section.1134}
+\contentsline {subsection}{\numberline {F.1.1}Simplified without priority}{80}{subsection.1183}
+\contentsline {subsection}{\numberline {F.1.2}Strongly Regular}{81}{subsection.1265}
+\contentsline {subsection}{\numberline {F.1.3}NFA for strongly regular WhitespaceAndComment}{84}{subsection.1368}
+\contentsline {subsection}{\numberline {F.1.4}DFA for strongly regular WhitespaceAndComment}{84}{subsection.1370}
+\contentsline {subsection}{\numberline {F.1.5}Results of generated highlighter}{85}{subsection.1372}
+\contentsline {subsection}{\numberline {F.1.6}Results of generated highlighter with syntax error}{85}{subsection.1374}
+\contentsline {subsection}{\numberline {F.1.7}Results of hand-written highlighter}{86}{subsection.1376}
+\contentsline {chapter}{Bibliography}{87}{appendix*.1378}

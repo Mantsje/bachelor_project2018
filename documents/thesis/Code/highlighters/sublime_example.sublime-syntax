@@ -1,0 +1,29 @@
+%YAML 1.2
+---
+
+name: Untitled
+file_extensions: []
+scope: source.untitled
+
+contexts:
+
+  main:
+    - include: Keywords
+    - include: String_begin
+
+  String_begin:
+    - match: '"'
+      push: String
+
+  String:
+    - meta_scope: string.quoted.double.untitled
+    - match: '\\.'
+      scope: constant.character.escape.untitled
+    - match: '"'
+      pop: true
+
+  Keywords:
+    - match: '\b(if|while|for|return)\b'
+      scope: keyword.control.untitled
+
+

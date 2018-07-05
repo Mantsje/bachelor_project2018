@@ -30,14 +30,16 @@ str toSublimeString(SHvar var, int tablevel)
 str toSublimeString(Action action, int tablevel) {
 	strfile = "";
 	switch(action) {
-		case \push(list[Context] contexts): {
-			s = ("" | it + "<c.name>, " | c <- contexts);
+		case \push(list[str] contexts): {
+			s = ("" | it + "<c>, " | c <- contexts);
 			strfile += ln("push: [<s[..size(s) - 2]>]", tablevel);
-		} case \setact(list[Context] contexts): {
-			s = ("" | it + "<c.name>, " | c <- contexts);
+		} case \setact(list[str] contexts): {
+			s = ("" | it + "<c>, " | c <- contexts);
 			strfile += ln("set: [<s[..size(s) - 2]>]", tablevel);
 		} case \pop(): {
 			strfile += ln("pop: true", tablevel);
+		} case \noact(): {
+			return strfile;
 		} default: throw error("Non-Exhaustive pattern match in Action");
 	}
 	return strfile;
@@ -50,10 +52,7 @@ str toSublimeString(Match mtch, int tablevel) {
 			strfile += ln("- match: \'<toSublimeString(regex, 0)>\'", tablevel);
 			strfile += toSublimeString(scope, tablevel + 1);
 			strfile += toSublimeString(action, tablevel + 1);	
-		} case \match-no-scope(SHRegex regex, Action action): {
-			strfile += ln("- match: \'<toSublimeString(regex, 0)>\'", tablevel);
-			strfile += toSublimeString(action, tablevel + 1);	
-		}
+		} default: throw error("Non-Exhaustive pattern match in Match");
 	}
 	return strfile;
 }
@@ -64,9 +63,23 @@ str toSublimeString(Scope scp, int tablevel) {
 		case \scope(str name): {
 			strfile += ln("scope: <name>", tablevel);
 		} case \meta-scope(str name): {
-			strfile += ln("meta_scope: <name>", tablevel);
+			strfile += ln("- meta_scope: <name>", tablevel);
+		} case \null(): {
+			strfile = "";
 		} default: throw error("Non-Exhaustive pattern match in Scope");
 	}
+	return strfile;
+}
+
+str contextBody(str name, Context con, int tablevel, bool includePrototype=true) {
+	strfile = "";
+	strfile += ln("<name>:", tablevel);
+	tablevel += 1;
+	if(!includePrototype) strfile += ln("- meta_include_prototype: false",tablevel);
+	strfile += toSublimeString(con.scope, tablevel);
+	for (i <- con.includes) strfile += ln("- include: <i.name>", tablevel);
+	for (m <- con.matches) strfile += toSublimeString(m, tablevel);
+	strfile += emptyline();
 	return strfile;
 }
 
@@ -74,31 +87,11 @@ str toSublimeString(Context cont, int tablevel) {
 	strfile = "";
 	switch(cont) {
 		case \context(str name, Scope scope, set[Match] matches, set[Context] includes): {
-			strfile += ln("<name>:", tablevel);
-			tablevel += 1;
-			strfile += toSublimeString(scope, tablevel);
-			for (i <- includes) strfile += ln("- include: <i.name>", tablevel);
-			for (m <- matches) strfile += toSublimeString(m, tablevel);
-		} case \context-no-scope(str name, set[Match] matches, set[Context] includes): {
-			strfile += ln("<name>:", tablevel);
-			tablevel += 1;
-			for (i <- includes) strfile += ln("- include: <i.name>", tablevel);
-			for (m <- matches) strfile += toSublimeString(m, tablevel);
+			strfile += contextBody(name, cont, tablevel, includePrototype=cont.includePrototype);
 		} case \main(Scope scope, set[Match] matches, set[Context] includes): {
-			strfile += ln("main:", tablevel);
-			tablevel += 1;
-			strfile += toSublimeString(scope, tablevel);
-			for (i <- includes) strfile += ln("- include: <i.name>", tablevel);
-			for (m <- matches) strfile += toSublimeString(m, tablevel);
-		} case \main-no-scope(set[Match] matches, set[Context] includes): {
-			strfile += ln("main:", tablevel);
-			tablevel += 1;
-			for (i <- includes) strfile += ln("- include: <i.name>", tablevel);
-			for (m <- matches) strfile += toSublimeString(m, tablevel);
-		} case \prototype(Scope scope, set[Context] includes): {
-			strfile += ln("<prototype>:", tablevel);
-			tablevel += 1;
-			for (i <- includes) strfile += ln("- include: <i.name>", tablevel);
+			strfile += contextBody("main", cont, tablevel);
+		} case \prototype(Scope scope, set[Match] matches, set[Context] includes): {
+			strfile += contextBody("prototype", cont, tablevel);
 		} default: throw error("Non-Exhaustive pattern match in Context");
 	}
 	strfile += emptyline();
@@ -108,7 +101,7 @@ str toSublimeString(Context cont, int tablevel) {
 str highlightertoSublimeString(SyntaxHighlighter syn, int tablevel) {
 	strfile = "";
 	switch(syn) {
-		case \highlighter(str name, set[str] extensions, set[SHvar] vars, set[Context] contexts): {
+		case \highlighter(str name, set[str] extensions, set[SHvar] vars, map[str, Context] contexts): {
 			strfile += ln("%YAML 1.2", tablevel);
 			strfile += ln("---", tablevel);
 			strfile += emptyline();
@@ -117,11 +110,13 @@ str highlightertoSublimeString(SyntaxHighlighter syn, int tablevel) {
 			strfile += ln("file_extensions: [<exlst[..size(exlst) - 2]>]", tablevel);
 			strfile += ln("scope: source.<takeOneFrom(extensions)[0]>", tablevel);
 			strfile += emptyline();
-			strfile += ln("variables:", tablevel);
-			for(var <- vars) strfile += toSublimeString(var, tablevel + 1);
-			strfile += emptyline();
+			if(!isEmpty(vars)) {
+				strfile += ln("variables:", tablevel);
+				for(var <- vars) strfile += toSublimeString(var, tablevel + 1);
+				strfile += emptyline();
+			}
 			strfile += ln("contexts:", tablevel);
-			for(cont <- contexts) strfile += toSublimeString(cont, tablevel + 1);	
+			for(cont <- sort({c | c <- contexts})) strfile += toSublimeString(contexts[cont], tablevel + 1);	
 		} default: throw error("Non-Exhaustive pattern match in SyntaxHighlighter");
 	}
 	return strfile;

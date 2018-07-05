@@ -1,0 +1,46 @@
+start syntax E 
+  = E "+" T
+  | T
+  ;
+  
+syntax T
+  = T "*" F
+  | F
+  ;
+
+syntax F
+  = "(" E ")"
+  | "a"
+  ;
+
+/* ---------- ---------- Into ---------- ---------- */
+
+syntax T_end =
+  "*" F 
+  | E_end 
+  ;
+
+syntax T =
+  F 
+  | T 
+  ;
+
+syntax E_end =
+  "+" T 
+  | ")" F_end
+  |
+  ;
+
+syntax F_end =
+  T_end 
+  ;
+
+start syntax E =
+  T 
+  | E 
+  ;
+
+syntax F =
+  "a" F_end 
+  | "(" E 
+  ;

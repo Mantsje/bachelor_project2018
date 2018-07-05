@@ -21,8 +21,8 @@ lexical String
 	= "\"" [a-z]* "\""
 	; 
 	
-lexical StdType = "int"|"float"|"str";
+lexical StdType = "int" | "float" | "str";
 
-keyword ControlFlowWord = "if"|"else"|"while"|"for";
+keyword ControlFlowWord = "if" | "else" | "while"|"for";
 
 lexical Id = [a-z] !<< [a-z]+ !>> [a-z] \ (StdType|ControlFlowWord);

@@ -1,0 +1,159 @@
+%YAML 1.2
+---
+
+name: Expression
+file_extensions: [exp]
+scope: source.exp
+
+contexts:
+  Expression_0:
+    - meta_scope: Expression_0
+    - match: '(null)'
+      scope: constant.language
+      set: [Expression_2]
+    - match: '(?=((?!(((else)|(fi)|(if)|(then))))(?<!([\x{61}-\x{7A}]))([\x{61}-\x{7A}])+(?!([\x{61}-\x{7A}]))))'
+      set: [Expression_3, Identifier_0]
+    - match: '(\()'
+      set: [Expression_1]
+
+
+  Expression_1:
+    - meta_scope: Expression_1
+    - match: '(null)'
+      scope: constant.language
+      set: [Expression_2]
+    - match: '(?=((?!(((else)|(fi)|(if)|(then))))(?<!([\x{61}-\x{7A}]))([\x{61}-\x{7A}])+(?!([\x{61}-\x{7A}]))))'
+      set: [Expression_3, Identifier_0]
+    - match: '(\()'
+      set: [Expression_1]
+
+
+  Expression_2:
+    - meta_scope: Expression_2
+    - match: '(\*)'
+      scope: keyword.operator.arithmetic
+      set: [Expression_7]
+    - match: '(?!((\-)|(\+)|(\*)|(\))))'
+      pop: true
+    - match: '(\))'
+      set: [Expression_5]
+    - match: '(\+)'
+      set: [Expression_6]
+    - match: '(\-)'
+      set: [Expression_4]
+
+
+  Expression_3:
+    - meta_scope: Expression_3
+    - match: '(\*)'
+      scope: keyword.operator.arithmetic
+      set: [Expression_7]
+    - match: '(?!((\-)|(\+)|(\*)|(\))))'
+      pop: true
+    - match: '(\))'
+      set: [Expression_5]
+    - match: '(\+)'
+      set: [Expression_6]
+    - match: '(\-)'
+      set: [Expression_4]
+
+
+  Expression_4:
+    - meta_scope: Expression_4
+    - match: '(null)'
+      scope: constant.language
+      set: [Expression_2]
+    - match: '(?=((?!(((else)|(fi)|(if)|(then))))(?<!([\x{61}-\x{7A}]))([\x{61}-\x{7A}])+(?!([\x{61}-\x{7A}]))))'
+      set: [Expression_3, Identifier_0]
+    - match: '(\()'
+      set: [Expression_1]
+
+
+  Expression_5:
+    - meta_scope: Expression_5
+    - match: '(\*)'
+      scope: keyword.operator.arithmetic
+      set: [Expression_7]
+    - match: '(?!((\-)|(\+)|(\*)|(\))))'
+      pop: true
+    - match: '(\))'
+      set: [Expression_5]
+    - match: '(\+)'
+      set: [Expression_6]
+    - match: '(\-)'
+      set: [Expression_4]
+
+
+  Expression_6:
+    - meta_scope: Expression_6
+    - match: '(null)'
+      scope: constant.language
+      set: [Expression_2]
+    - match: '(?=((?!(((else)|(fi)|(if)|(then))))(?<!([\x{61}-\x{7A}]))([\x{61}-\x{7A}])+(?!([\x{61}-\x{7A}]))))'
+      set: [Expression_3, Identifier_0]
+    - match: '(\()'
+      set: [Expression_1]
+
+
+  Expression_7:
+    - meta_scope: Expression_7
+    - match: '(null)'
+      scope: constant.language
+      set: [Expression_2]
+    - match: '(?=((?!(((else)|(fi)|(if)|(then))))(?<!([\x{61}-\x{7A}]))([\x{61}-\x{7A}])+(?!([\x{61}-\x{7A}]))))'
+      set: [Expression_3, Identifier_0]
+    - match: '(\()'
+      set: [Expression_1]
+
+
+  Identifier_0:
+    - meta_scope: Identifier_0
+    - match: '((?!(((else)|(fi)|(if)|(then)))))'
+      set: [Identifier_PRECOND_0_0]
+
+
+  Identifier_INNER_0_2:
+    - meta_include_prototype: false
+    - meta_scope: Identifier_INNER_0_2
+    - match: '((?!([\x{61}-\x{7A}])))'
+      set: [Identifier_POSTCOND_0_3]
+
+
+  Identifier_POSTCOND_0_3:
+    - meta_include_prototype: false
+    - meta_scope: Identifier_POSTCOND_0_3
+    - match: ''
+      pop: true
+
+
+  Identifier_PRECOND_0_0:
+    - meta_include_prototype: false
+    - meta_scope: Identifier_PRECOND_0_0
+    - match: '((?<!([\x{61}-\x{7A}])))'
+      set: [Identifier_PRECOND_0_1]
+
+
+  Identifier_PRECOND_0_1:
+    - meta_include_prototype: false
+    - meta_scope: Identifier_PRECOND_0_1
+    - match: '(([\x{61}-\x{7A}])+)'
+      set: [Identifier_INNER_0_2]
+
+
+  MyLayout_0:
+    - meta_scope: MyLayout_0
+    - match: '(([\x{9}-\x{A}\x{C}-\x{D}\x{20}])*)'
+      pop: true
+
+
+  main:
+    - meta_scope: main
+    - include: Expression_0
+
+
+  prototype:
+    - meta_scope: prototype
+    - match: '(?=((([\x{9}-\x{A}\x{C}-\x{D}\x{20}])*)))'
+      push: [MyLayout_0]
+
+

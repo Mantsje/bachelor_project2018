@@ -1,4 +1,4 @@
-module grammars::expressions::testing::Annotations
+module grammars::toRegularGrammarTesters::testing::Annotations
 
 /* Test for checking performance with annotations in the grammar ...
  *

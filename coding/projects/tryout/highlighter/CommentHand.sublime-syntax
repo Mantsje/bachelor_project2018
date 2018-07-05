@@ -1,0 +1,29 @@
+%YAML 1.2
+---
+
+name: CommentHand
+file_extensions: [comm]
+scope: source.comm
+
+contexts:
+  PreComment:
+    - meta_scope: C_0
+    - match: '(\/\*)'
+    # Match opening comment
+      set: [InComment]
+
+  InComment:
+    - meta_scope: comment.block.comm
+    - match: '(\/\*)'
+      # Match nested comment opening
+      push: [InComment]
+    - match: '(\*\/)'
+      # Match closing comment -> pop one context
+      pop: true
+
+
+  main:
+    - meta_scope: main
+    - include: PreComment
+
+

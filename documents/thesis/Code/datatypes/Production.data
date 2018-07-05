@@ -1,0 +1,10 @@
+data Production
+	= prod(Symbol def, list[Symbol] symbols, set[Attr] attributes)
+	| regular(Symbol def)
+	| error(Production prod, int dot)
+	| skipped()
+	| \priority(Symbol def, list[Production] choices)
+	| \associativity(Symbol def, Associativity \assoc, set[Production] alternatives)
+	| \reference(Symbol def, str cons)
+	| \choice(Symbol s, set[Production] choices)
+	;
